@@ -1,0 +1,73 @@
+@use 'variables' as var;
+@use 'mixins' as mix;
+
+.svh-screen {
+    height: 100vh;
+    height: 100svh;
+}
+
+.svh-screen-incl-header {
+    height: calc(100vh - var(--header-height));
+    height: calc(100svh - var(--header-height));
+
+    @include mix.respond-to-min(var.$xl) {
+        height: calc(100vh - var(--header-height-desktop));
+        height: calc(100svh - var(--header-height-desktop));
+    }
+}
+
+.min-svh-screen {
+    min-height: 100vh;
+    min-height: 100svh;
+}
+
+.min-svh-screen-incl-header {
+    min-height: min(calc(100vh - var(--header-height)), 1500px);
+    min-height: min(calc(100svh - var(--header-height)), 1500px);
+
+    @include mix.respond-to-min(var.$xl) {
+        min-height: min(calc(100vh - var(--header-height-desktop)), 1500px);
+        min-height: min(calc(100svh - var(--header-height-desktop)), 1500px);
+    }
+}
+
+.lvh-screen {
+    height: 100vh;
+    height: 100lvh;
+}
+
+.dvh-screen {
+    height: 100vh;
+    height: 100dvh;
+}
+
+.base-block-outer {
+    padding-bottom: var(--space-xs);
+
+    @include mix.respond-to-min(var.$md) {
+        padding-bottom: var(--space-m);
+    }
+
+    // &:last-of-type {
+    //     padding-bottom: 0;
+    // }
+}
+
+.base-block {
+    width: 100%;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+
+    @include mix.respond-to-min(var.$xl) {
+        padding-right: 3rem;
+        padding-left: 3rem;
+    }
+
+    @include mix.respond-to-min(var.$xxl) {
+        padding-right: 9rem;
+        padding-left: 9rem;
+    }
+}

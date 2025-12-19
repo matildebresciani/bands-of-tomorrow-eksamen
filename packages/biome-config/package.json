@@ -1,0 +1,12 @@
+{
+    "name": "@repo/biome-config",
+    "exports": {
+        ".": "./biome.jsonc"
+    },
+    "scripts": {
+        "format:fix": "biome format --fix"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.9.4"
+    }
+}

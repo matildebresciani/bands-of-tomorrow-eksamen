@@ -1,0 +1,143 @@
+.gallery {
+    display: grid;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+/* Universal crop */
+.gallery__item {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: block;
+
+    img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; 
+}   
+}
+
+/* Full width */
+.gallery--fullWidth {
+    grid-template-columns: 1fr;
+    grid-template-areas: "slot_fullWidth";
+    
+}
+.slot_fullWidth { grid-area: slot_fullWidth; aspect-ratio: 16/9; height: 100%; max-height: 518px; }
+
+/* Two column */
+.gallery--twoColumn {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+        "slot_left"
+        "slot_right";
+    height: 100vh;
+
+    @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "slot_left slot_right";
+    height: 100%;
+    }
+}
+.slot_left { grid-area: slot_left; aspect-ratio: 1/1; height: 100%; max-height: 518px;}
+.slot_right { grid-area: slot_right; aspect-ratio: 1/1; height: 100%; max-height: 518px;}
+
+
+/* Mosaic 3 */
+.gallery--mosaic3 {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "slot_big" 
+        "slot_big"
+        "slot_wideTop" 
+        "slot_wideBottom";
+    height: 100vh;
+
+    @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+        "slot_big slot_wideTop"
+        "slot_big slot_wideBottom";
+    height: 100%;
+    }  
+}
+.slot_big { grid-area: slot_big; aspect-ratio: 1/1; height: 100%; max-height: 520px;}
+.slot_wideTop { grid-area: slot_wideTop; aspect-ratio: 2/1; height: 100%; max-height: 252px;}
+.slot_wideBottom { grid-area: slot_wideBottom; aspect-ratio: 2/1; height: 100%; max-height: 252px;}
+
+/* Big top + two under */
+.gallery--bigTopTwoUnder {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "slot_bottomLeft"
+        "slot_top"
+        "slot_bottomRight";
+    height: 100vh;
+    @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "slot_top slot_top"
+        "slot_bottomLeft slot_bottomRight";
+    height: 100%;
+    }
+}
+.slot_top { grid-area: slot_top; aspect-ratio: 16/9; height: 100%; max-height: 518px;}
+.slot_bottomLeft { grid-area: slot_bottomLeft; aspect-ratio: 1/1; height: 100%; max-height: 518px;}
+.slot_bottomRight { grid-area: slot_bottomRight; aspect-ratio: 1/1; height: 100%; max-height: 518px;}
+
+/* Three in a row */
+.gallery--threeColumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+        "slot_a slot_b"
+        "slot_c slot_c";
+    gap: var(--p-xs);
+    height: auto;
+
+    @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+        "slot_a slot_b slot_c";
+    height: 100%;
+    }
+}
+.slot_a { grid-area: slot_a; aspect-ratio: 9/16; height: 100%; max-height: 518px;}
+.slot_b { grid-area: slot_b; aspect-ratio: 9/16; height: 100%; max-height: 518px;}
+.slot_c { grid-area: slot_c; aspect-ratio: 9/16; height: 100%; max-height: 518px;}
+
+/* Three top + one under */
+.gallery--threeTopOneUnder {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "slot_topLeft"
+        "slot_topCenter"
+        "slot_topRight"
+        "slot_bottom";
+    height: 100vh;
+
+    @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+        "slot_topLeft slot_topCenter slot_topRight"
+        "slot_bottom slot_bottom slot_bottom";
+    height: 100%;
+    }
+}
+.slot_topLeft { grid-area: slot_topLeft; aspect-ratio: 1/1; height: 100%; max-height: 252px;}
+.slot_topCenter { grid-area: slot_topCenter; aspect-ratio: 1/1; height: 100%; max-height: 252px;}
+.slot_topRight { grid-area: slot_topRight; aspect-ratio: 1/1; height: 100%; max-height: 252px;}
+.slot_bottom { grid-area: slot_bottom; aspect-ratio: 16/9; height: 100%; max-height: 371px; }
+
+
+

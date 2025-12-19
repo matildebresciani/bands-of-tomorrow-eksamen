@@ -1,0 +1,108 @@
+@use '../../lib/styles/tailwind';
+@use '../../lib/styles/variables.scss';
+@use '../../lib/styles/mixins.scss';
+@use '../../lib/styles/typography';
+@use '../../lib/styles/grid';
+@use '../../lib/styles/containers';
+@use '../../lib/styles/helpers';
+@use '../../lib/styles/overlays';
+@use '../../lib/styles/gallery';
+@use '../../lib/styles/slider';
+
+ 
+:root {
+
+    --font-heading: var(--font-dela-gothic-one); 
+    --font-body: var(--font-inclusive-sans); 
+    // --header-height: 104px;
+    // --header-height-offset: calc(var(--header-height) + 1px);
+    // --header-height-desktop: 303px;
+    // --header-height-desktop-offset: calc(var(--header-height-desktop) + 1px);
+        /* MOBILE */
+    --header-height: 101px;
+    --header-height-offset: 72px;
+
+    /* DESKTOP */
+    --header-height-desktop: 160px; 
+    --header-height-desktop-offset: 120px;
+
+    --header-rows-desktop-large: 110px 50px;
+    --header-rows-desktop-small: 80px 50px; 
+
+ 
+    //Color variables fra designsystemet i Figma
+    --bg-base: #FBF8F1; 
+    --bg-highlight: #3D59B0; 
+    --bg-subtle: #D8D5CD;
+    --bg-section-2: #BDC9E7;
+    
+    --fg-base: #33261C;
+    --fg-on-color: #FBF8F1;
+    --fg-subtle: #BDC9E7;
+    --fg-faded: #403B3B;
+    --fg-highlight: #3D59B0; 
+    --fg-highlight-2: #DF4739;
+
+    --button-primary:#DF4739;
+    --button-primary-on-color: #FBF8F1;
+    --button-secondary: #3D59B0; 
+    --button-primary-hover: #943128;
+    --button-primary-on-color-hover: #BDC9E7;
+    --button-secondary-hover: #344571;
+    --button-subtle: #D8D5CD;
+
+    --button-text: #FBF8F1;
+    --button-text-on-subtle: #33261C;
+
+    --bg-label-red: #DF4739;
+    --bg-label-blue: #3D59B0;
+    --bg-label-lightblue: #BDC9E7;
+    --bg-label-dark: #33261C;
+
+    --border-base: #33261C;
+
+    --input-bg: #FBFAF7;
+    --input-subtle: #EAEAEA;
+    --input-border: var(--border-base);
+
+    --overlay-red: #DF4739;
+    --overlay-blue: #3D59B0;
+
+    --logo-blue: rgba(61, 89, 176, 0.77);
+    --logo-brown: rgba(60, 30, 5, 0.73);    
+    --logo-red: #DF4739;
+    
+     //Padding variables fra designsystemet i Figma
+    --p-general: 0;
+    --p-xs: 8px;
+    --p-s: 12px;
+    --p-base: 16px;
+    --p-m: 20px;
+    --p-l: 32px;
+    --p-xl: 100px;
+    --p-xxl: 265px;
+
+    //Spacing variables fra designsystemet i Figma
+    --space-general: 0;
+    --space-xxs: 48px;
+    --space-xs: 64px;
+    --space-sm: 80px;
+    --space-m: 96px;
+    --space-l: 128px;
+    --space-xl: 160px;
+    --space-xxl: 320px;
+}
+ 
+* {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+ 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    background-color: var(--bg-base);
+    font-family: var(--font-body);
+    color: var(--fg-base);
+}

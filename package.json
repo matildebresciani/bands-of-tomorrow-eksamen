@@ -1,0 +1,25 @@
+{
+    "name": "boilerplate-name",
+    "private": true,
+    "scripts": {
+        "build": "turbo build",
+        "dev": "turbo dev",
+        "superdev": "turbo dev",
+        "typecheck": "turbo typecheck",
+        "lint": "turbo lint && biome check .",
+        "lint:fix": "turbo lint:fix && biome check . --fix",
+        "format:check": "turbo format:check && biome format",
+        "format:fix": "turbo format:fix && biome format --fix"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.9.4",
+        "@repo/biome-config": "workspace:*",
+        "turbo": "^2.3.0",
+        "typescript": "5.5.4"
+    },
+    "engines": {
+        "node": ">=18"
+    },
+    "packageManager": "pnpm@9.15.2",
+    "workspaces": ["apps/*", "packages/*"]
+}

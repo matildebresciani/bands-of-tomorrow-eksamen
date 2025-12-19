@@ -1,0 +1,41 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+    "extends": ["@repo/biome-config"],
+    "files": {
+        "ignore": [
+            "src/app/(payload)/admin/importMap.js",
+            "src/payload-types.ts"
+        ]
+    },
+    "linter": {
+        "rules": {
+            "suspicious": {
+                "noExplicitAny": "warn",
+                "noArrayIndexKey": "warn"
+            },
+            "style": {
+                "noNonNullAssertion": "warn",
+                "useConst": "warn"
+            },
+            "correctness": {
+                "useExhaustiveDependencies": "warn"
+            },
+            "complexity": {
+                "noForEach": "off"
+            },
+            "security": {
+                "noDangerouslySetInnerHtml": "warn"
+            },
+            "a11y": {
+                "useSemanticElements": "warn"
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "single",
+            "trailingCommas": "all",
+            "semicolons": "always"
+        }
+    }
+}

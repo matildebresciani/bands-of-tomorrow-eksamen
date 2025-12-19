@@ -1,0 +1,45 @@
+@mixin respond-to-min($breakpoint, $direction: '') {
+    @if $direction == 'height' {
+        @media only screen and (min-height: $breakpoint) {
+            @content;
+        }
+    } @else {
+        @media only screen and (min-width: $breakpoint) {
+            @content;
+        }
+    }
+}
+
+@mixin respond-to-max($breakpoint, $direction: '') {
+    @if $direction == 'height' {
+        @media only screen and (max-height: $breakpoint) {
+            @content;
+        }
+    } @else {
+        @media only screen and (max-width: $breakpoint) {
+            @content;
+        }
+    }
+}
+
+@mixin scrollbars(
+    $size: 4px,
+    $foreground-color: var(--fg-accent),
+    $background-color: var(--bg-faded)
+) {
+    // For Chrome & Safari
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $foreground-color;
+    }
+    &::-webkit-scrollbar-track {
+        background: $background-color;
+    }
+
+    // Standard version (Firefox only for now)
+    scrollbar-color: $foreground-color $background-color;
+    scrollbar-width: thin;
+}

@@ -1,0 +1,33 @@
+//Overlay classes
+
+.halftone {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.95) 0.06rem, transparent 0.07rem);
+  background-size: 0.22rem 0.22rem;
+  background-repeat: repeat;
+  mix-blend-mode: screen; /* lysner underliggende billede */
+  opacity: 0.9;
+  pointer-events: none;
+}
+.baselayer_white {
+    background-color: #FFFFFF;
+}
+
+.overlay_red {
+  background-color: #DF4739;
+  opacity: 0.60;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.overlay_black {
+  background-color: #000000;
+  opacity: 0.60;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* hvis vi ikke bruger Tailwind's pointer-events utility, behold denne */
+.pointer-events-none { pointer-events: none; }
+
+
+

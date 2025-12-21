@@ -43,9 +43,7 @@ export default async function Page({ params }: Props) {
                 <div className="oakgrid">
                     <div className="col-span-12 space-y-section-xxs">
                         <Heading>Anmeldelser</Heading>
-                        {/* TODO: Filtrering */}
                         <FilterBar articles={reviews.docs} genres={genres} />
-                        {/* <ArticlesArchive articles={reviews.docs} /> */}
                     </div>
                 </div>
             </BaseBlock>

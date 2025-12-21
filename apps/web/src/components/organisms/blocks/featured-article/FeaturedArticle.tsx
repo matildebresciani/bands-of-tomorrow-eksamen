@@ -72,7 +72,7 @@ const FeaturedArticleBlock: BC<FeaturedArticleProps> = async ({ block, locale })
 
                 <div className="col-span-12 lg:col-start-8 lg:col-span-5 space-y-m">
                     {article.publishedAt && (
-                        <span className="text-fg-subtle block body-sm">
+                        <span className="text-fg-subtle block body-sm font-semibold">
                             {formatDateTime(article.publishedAt, 'long')}
                         </span>
                     )}

@@ -37,7 +37,6 @@ const HeroSlider = ({ featuredArticles }: Props) => {
 
     return (
         <div className="min-svh-screen-incl-header relative w-full text-fg-on-color flex items-end">
-            {/* Background slider */}
             {isSlider ? (
                 <Swiper
                     onSwiper={(swiper) => setSwiper(swiper)}
@@ -57,6 +56,8 @@ const HeroSlider = ({ featuredArticles }: Props) => {
                         const img = article?.contentMeta?.featuredImage;
                         if (!img || typeof img !== 'object') return null;
 
+                        const isPriority = idx === 0;
+
                         return (
                             <SwiperSlide
                                 key={article.id || idx}
@@ -66,7 +67,13 @@ const HeroSlider = ({ featuredArticles }: Props) => {
                                 }}
                                 className="cursor-pointer"
                             >
-                                <ImageMedia resource={img} imgClassName="object-cover w-full h-full" />
+                                <ImageMedia
+                                    resource={img}
+                                    imgClassName="object-cover w-full h-full"
+                                    size="100vw"
+                                    priority={isPriority}
+                                    loading={isPriority ? 'eager' : 'lazy'}
+                                />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                             </SwiperSlide>
                         );
@@ -79,6 +86,9 @@ const HeroSlider = ({ featuredArticles }: Props) => {
                         <ImageMedia
                             resource={featuredArticles[0].contentMeta.featuredImage}
                             imgClassName="object-cover w-full h-full"
+                            size="100vw"
+                            priority
+                            loading="eager"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     </div>
@@ -125,6 +135,7 @@ const HeroSlider = ({ featuredArticles }: Props) => {
                             totalSlides={featuredArticles.length}
                             currentSlide={activeSlide}
                             onBulletClick={(i) => swiper?.slideToLoop(i)}
+                            className="hidden md:flex"
                         />
                     </div>
                 )}

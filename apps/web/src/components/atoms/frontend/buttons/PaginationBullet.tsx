@@ -8,11 +8,17 @@ const PaginationBullet = ({ active, onClick }: Props) => {
         <button
             type="button"
             onClick={onClick}
-            className={`
-                w-3 h-3 rounded-full transition-all border border-button-primary cursor-pointer
-                ${active ? 'bg-button-primary' : 'bg-transparent'}
-            `}
-        />
+            aria-current={active ? 'true' : undefined}
+            className="flex items-center justify-center w-6 h-6 cursor-pointer"
+        >
+            <span
+                className={`
+                    block rounded-full transition-all
+                    w-4 h-4 border border-button-primary
+                    ${active ? 'bg-button-primary' : 'bg-transparent'}
+                `}
+            />
+        </button>
     );
 };
 

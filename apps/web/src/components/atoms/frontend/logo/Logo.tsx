@@ -16,6 +16,7 @@ const Logo = ({ variant = 'icon', className }: Props) => {
             width={variant === 'full' ? 1620 : 78}
             height={variant === 'full' ? 242 : 61}
             className={cn(className)}
+            priority
         />
     );
 };

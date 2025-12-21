@@ -46,6 +46,8 @@ const FeaturedCard = ({ article, showLabel, className }: Props) => {
                         fallbackAlt={article?.title || 'Article Image'}
                         resource={article?.contentMeta?.featuredImage}
                         imgClassName="object-cover w-full h-full transition-transform duration-500 ease-out group-hover:scale-120"
+                        priority
+                        loading="eager"
                     />
                 )}
                 {showLabel && (

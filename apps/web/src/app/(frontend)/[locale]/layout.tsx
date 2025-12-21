@@ -45,7 +45,12 @@ export default async function RootLayout({ children, params }: Props) {
     setRequestLocale(locale);
 
     return (
-        <html className={cn(delaGothicOne.variable, inclusiveSans.variable)} lang={locale} suppressHydrationWarning>
+        <html
+            className={cn(delaGothicOne.variable, inclusiveSans.variable)}
+            lang={locale}
+            suppressHydrationWarning
+            data-scroll-behavior="smooth"
+        >
             <head>
                 <HeadScripts />
                 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />

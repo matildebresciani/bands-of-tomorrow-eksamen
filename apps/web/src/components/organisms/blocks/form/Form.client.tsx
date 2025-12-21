@@ -1,6 +1,7 @@
 'use client';
 
 import BaseButton from '@/components/atoms/frontend/buttons/BaseButton';
+import LoadingButton from '@/components/atoms/frontend/buttons/LoadingButton';
 import { generateZodFromForm } from '@/lib/schemas/forms';
 import { submitForm } from '@/lib/server/dynamic-form-submit';
 import { cn } from '@/lib/utilities/ui';
@@ -101,10 +102,12 @@ const FormClient = ({ form, layout }: Props) => {
                         layout === 'one-column' && 'justify-center',
                     )}
                 >
-                    <BaseButton
+                    <LoadingButton
                         type="submit"
                         variant="secondary"
                         title={form.submitButtonLabel || 'Indsend formular'}
+                        isLoading={isPending}
+                        loadingText={'Indsender...'}
                     />
                 </div>
             </form>

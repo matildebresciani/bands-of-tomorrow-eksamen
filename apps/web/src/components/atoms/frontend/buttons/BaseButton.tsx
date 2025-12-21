@@ -2,17 +2,29 @@
 import { cn } from '@/lib/utilities/ui';
 import Link from 'next/link';
 
-type Props = {
+export type BaseButtonProps = {
     type?: 'button' | 'submit' | 'link';
-    title: string;
+    title?: string;
     href?: string;
     openNewTab?: boolean | null;
     className?: string;
     variant?: 'primary' | 'primaryOnColor' | 'secondary';
     onClick?: () => void;
+    children?: React.ReactNode;
+    disabled?: boolean;
 };
 
-const BaseButton = ({ type, title, href, openNewTab, className, onClick, variant = 'primary' }: Props) => {
+const BaseButton = ({
+    type,
+    title,
+    href,
+    openNewTab,
+    className,
+    onClick,
+    variant = 'primary',
+    children,
+    disabled,
+}: BaseButtonProps) => {
     const style = cn(
         'inline-flex cursor-pointer w-auto button-text p-xs sm:p-s transition-colors duration-200',
         variant === 'primary' && 'bg-button-primary text-button-text hover:bg-button-primary-hover p-s justify-center',
@@ -23,17 +35,24 @@ const BaseButton = ({ type, title, href, openNewTab, className, onClick, variant
         className,
     );
 
+    const content = children ?? title;
+
     if (type === 'link' && href) {
         return (
             <Link href={href} className={style} target={openNewTab ? '_blank' : '_self'} onClick={() => onClick?.()}>
-                {title}
+                {content}
             </Link>
         );
     }
 
     return (
-        <button type={type && type !== 'link' ? type : 'button'} className={style} onClick={() => onClick?.()}>
-            {title}
+        <button
+            type={type && type !== 'link' ? type : 'button'}
+            className={style}
+            onClick={() => onClick?.()}
+            disabled={disabled}
+        >
+            {content}
         </button>
     );
 };

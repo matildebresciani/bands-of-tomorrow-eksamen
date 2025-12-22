@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utilities/ui';
+import { X } from 'lucide-react';
 import { useId, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FieldBase from './FieldBase';
@@ -91,9 +92,12 @@ const UploadField = ({ label, name, isRequired, buttonLabel, placeholder, maxFil
                             {Array.from(files).map((file) => (
                                 <li
                                     key={file.name + file.size}
-                                    className="text-sm flex items-center justify-center gap-2"
+                                    className="text-sm flex items-center justify-between gap-2 bg-white p-xs border border-border-base"
                                 >
                                     <span className="truncate">{file.name}</span>
+                                    <button type="button" className="text-red-500 hover:text-red-700">
+                                        <X />
+                                    </button>
                                 </li>
                             ))}
                         </ul>

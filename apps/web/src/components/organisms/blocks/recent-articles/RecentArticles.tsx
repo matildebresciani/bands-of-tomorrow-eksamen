@@ -20,7 +20,7 @@ const RecentArticlesBlock: BC<RecentArticlesProps> = async ({ block }) => {
             <div className="oakgrid gap-0">
                 {heading && (
                     //TODO: Mobile spacing margin bottom too big
-                    <Heading level={2} className="col-span-12 text-center mb-section-xxs">
+                    <Heading level={1} className="col-span-12 text-center mb-section-xxs">
                         {heading}
                     </Heading>
                 )}

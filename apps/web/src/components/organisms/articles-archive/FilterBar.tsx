@@ -46,7 +46,7 @@ export default function FilterBar({ articles, genres }: Props) {
         <div>
             <div className="space-y-m mb-section-xxs">
                 {/* Label */}
-                <h3 className="heading-lg">Filtrering:</h3>
+                <h2 className="heading-4 uppercase">Filtrering:</h2>
 
                 {/* TYPE FILTER */}
                 <div className="flex flex-col md:flex-row gap-m md:gap-l justify-start md:items-center">

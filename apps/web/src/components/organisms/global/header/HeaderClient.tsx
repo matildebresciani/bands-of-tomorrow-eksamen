@@ -1,6 +1,7 @@
 'use client';
 
 import LogoLink from '@/components/atoms/frontend/logo/Link';
+import ProcessBar from '@/components/atoms/frontend/processbar/ProcessBar';
 import SearchBar from '@/components/molecules/frontend/SearchBar';
 import type { Locale } from '@/i18n/localized-collections';
 import type { Navigation } from '@/payload-types';
@@ -61,6 +62,7 @@ export default function HeaderClient({ main, mobile, locale }: Props) {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             style={{ willChange: 'height' }}
         >
+            <ProcessBar />
             <BaseBlock classNameOuter="!pb-0">
                 <div className="oakgrid">
                     <div className="col-span-12 relative h-full">

@@ -21,7 +21,7 @@ const VolunteerRoleCard = ({ thumbnail, title, description }: Props) => {
                 </div>
             )}
             <div className="flex flex-col p-s gap-s md:border-l border-base flex-1">
-                <h4>{title}</h4>
+                <h3 className="heading-4">{title}</h3>
                 <p>{description}</p>
             </div>
         </div>

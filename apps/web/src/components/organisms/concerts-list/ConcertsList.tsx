@@ -36,9 +36,9 @@ const ConcertsList = ({ concerts, className }: Props) => {
         <div className={className}>
             {Object.entries(groupedByMonth).map(([month, concerts]) => (
                 <div key={month} className="oakgrid auto-rows-max">
-                    <h3 className="col-span-12 md:col-span-3 md:row-start-1 md:row-span-full md:sticky md:top-[100px] text-center uppercase md:text-start mb-section-xs md:mb-0 w-fit">
+                    <h2 className="heading-xl col-span-12 md:col-span-3 md:row-start-1 md:row-span-full md:sticky md:top-[100px] text-center uppercase md:text-start mb-section-xs md:mb-0 w-fit">
                         {month}
-                    </h3>
+                    </h2>
 
                     <div className="col-span-12 md:col-start-5 md:col-span-8 w-full gap-y-m">
                         {concerts.map((concert) => {

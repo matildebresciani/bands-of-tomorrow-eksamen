@@ -15,7 +15,7 @@ const PaginationButton = ({ action, className, onClick }: Props) => {
     );
 
     return (
-        <button type="button" className={style} onClick={() => onClick?.()}>
+        <button type="button" aria-label="pagination arrow button" className={style} onClick={() => onClick?.()}>
             {action === 'prev' && <ArrowLeft />}
             {action === 'next' && <ArrowRight />}
         </button>

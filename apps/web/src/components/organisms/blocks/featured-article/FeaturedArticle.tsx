@@ -53,7 +53,7 @@ const FeaturedArticleBlock: BC<FeaturedArticleProps> = async ({ block, locale })
                     </div>
 
                     <div className="relative z-10 p-m">
-                        <h3 className="text-fg-highlight uppercase">{label}</h3>
+                        <h2 className="text-fg-highlight uppercase heading-3">{label}</h2>
                     </div>
 
                     {article.contentMeta?.featuredImage && (

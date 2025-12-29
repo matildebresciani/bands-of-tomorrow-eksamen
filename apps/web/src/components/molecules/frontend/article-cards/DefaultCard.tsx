@@ -53,7 +53,7 @@ const DefaultCard = ({ article, showLabel, className }: Props) => {
                             )}
                         </div>
                     </div>
-                    <h4>{article.title}</h4>
+                    <h3 className="heading-4">{article.title}</h3>
                 </div>
             </div>
         </Link>

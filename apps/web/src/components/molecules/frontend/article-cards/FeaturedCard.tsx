@@ -34,7 +34,7 @@ const FeaturedCard = ({ article, showLabel, className }: Props) => {
                     <div>{article.publishedAt && <span>{formatDateTime(article.publishedAt, 'long')}</span>}</div>
                 </div>
                 <div className="flex flex-col flex-grow">
-                    <h3 className="uppercase pb-m">{article.title}</h3>
+                    <h2 className="uppercase pb-m heading-3">{article.title}</h2>
                     <p className="pb-base">{article.contentMeta?.excerpt}</p>
                     <BaseButton variant="primary" title="Læs artikel" className="mt-auto w-fit" />
                 </div>

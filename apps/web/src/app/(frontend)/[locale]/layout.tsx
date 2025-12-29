@@ -53,7 +53,7 @@ export default async function RootLayout({ children, params }: Props) {
         >
             <head>
                 <HeadScripts />
-                <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+                <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5" />
             </head>
             <body className="pt-(--header-height) md:pt-(--header-height-desktop)">
                 {/* <body className="pt-[calc(var(--header-height)+var(--space-xs))] md:pt-[calc(var(--header-height-desktop)+var(--space-m))]"> */}

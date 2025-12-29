@@ -49,7 +49,7 @@ const LatestBigCard = ({ article }: Props) => {
                             )}
                         </div>
                     </div>
-                    <h3 className="line-clamp-4 uppercase heading-4">{article.title}</h3>
+                    <h2 className="line-clamp-4 uppercase heading-4">{article.title}</h2>
                 </div>
             </div>
         </Link>

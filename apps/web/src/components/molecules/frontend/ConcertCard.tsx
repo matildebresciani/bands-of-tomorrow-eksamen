@@ -32,7 +32,7 @@ const ConcertCard = ({ concert, index }: Props) => {
                         fill
                         alt={concert?.artist || 'Concert Image'}
                         resource={concert?.featuredImage}
-                        imgClassName="object-cover w-full h-full filter grayscale duration-300 group-hover:grayscale-0"
+                        imgClassName="object-cover w-full h-full filter grayscale group-hover:grayscale-0 transition-transform duration-500 ease-out group-hover:scale-120"
                         size="100vw, (min-width: 769px) 50vw, (min-width: 1281px) 33vw"
                     />
                     {/* Overlay */}
@@ -50,7 +50,7 @@ const ConcertCard = ({ concert, index }: Props) => {
                     <div className="flex flex-col gap-1 md:gap-s flex-wrap">
                         <p>{formatDateTime(concert.date, 'dot')}</p>
                         <div>
-                            <h4 className="pb-xs uppercase">{concert.artist}</h4>
+                            <h3 className="pb-xs body-lg uppercase">{concert.artist}</h3>
                             {concert.support && <p className="italic font-light">+ Support: {concert.support}</p>}
                         </div>
                         <p>

@@ -48,7 +48,7 @@ const LatestSmallCard = ({ article }: Props) => {
                             {article.artistName && <span>{article.artistName}</span>}
                         </div> */}
                     </div>
-                    <h4>{article.title}</h4>
+                    <h3 className="heading-4">{article.title}</h3>
                 </div>
             </div>
         </Link>

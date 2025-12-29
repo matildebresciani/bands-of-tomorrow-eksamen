@@ -59,7 +59,7 @@ const TextImageBlock: BC<TextImageProps> = ({ block, locale }) => {
 
                 {/* Text + Button */}
                 <div className={textColClasses}>
-                    {heading && <h3 className="uppercase">{heading}</h3>}
+                    {heading && <h2 className="uppercase heading-3">{heading}</h2>}
                     {richText && <RichText data={richText} className="mx-0" />}
                     {addLink && (
                         <DynamicButton

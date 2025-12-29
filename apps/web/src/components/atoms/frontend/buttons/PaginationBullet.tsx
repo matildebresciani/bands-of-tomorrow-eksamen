@@ -7,6 +7,7 @@ const PaginationBullet = ({ active, onClick }: Props) => {
     return (
         <button
             type="button"
+            aria-label="pagination bullet button"
             onClick={onClick}
             aria-current={active ? 'true' : undefined}
             className="flex items-center justify-center w-6 h-6 cursor-pointer"

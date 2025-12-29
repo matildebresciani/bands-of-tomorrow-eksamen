@@ -53,6 +53,7 @@ export default function SearchBar() {
                 whileHover={{ scale: 1.2 }}
                 transition={{ duration: 0.2 }}
                 className="cursor-pointer"
+                aria-label="search button"
             >
                 {/* Mobil: 32px */}
                 <Search size={32} strokeWidth={2} className="block lg:hidden" />

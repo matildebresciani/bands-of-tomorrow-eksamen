@@ -62,30 +62,38 @@ const ArticlesArchive = ({ articles }: Props) => {
 
             {/* Rows */}
             <div className="grid grid-cols-1 gap-y-section-xxs md:gap-y-section-xs">
-                {rows.map((row, rowIndex) => (
-                    <motion.div
-                        key={rowIndex}
-                        className="col-span-full"
-                        variants={rowVariants}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true, margin: '-120px' }}
-                    >
-                        <div className="grid md:grid-cols-3 gap-4">
-                            {row.map((article, colIndex) => (
-                                <motion.div
-                                    key={article.id}
-                                    variants={cardVariants}
-                                    transition={{
-                                        delay: colIndex * 0.15,
-                                    }}
-                                >
-                                    <ArticleCard article={article} />
-                                </motion.div>
-                            ))}
-                        </div>
-                    </motion.div>
-                ))}
+                {rows.map((row) => {
+                    if (!row[0]) return null; // <-- sikkerhedstjek
+
+                    return (
+                        <motion.div
+                            key={row[0].id}
+                            className="col-span-full"
+                            variants={rowVariants}
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true, margin: '-120px' }}
+                        >
+                            <div className="grid md:grid-cols-3 gap-4">
+                                {row.map((article, colIndex) => (
+                                    <motion.div
+                                        key={article.id}
+                                        initial={{ opacity: 0, y: 40 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, margin: '-100px' }}
+                                        transition={{
+                                            duration: 0.45,
+                                            ease: 'easeOut',
+                                            delay: colIndex * 0.15, // kun desktop stagger
+                                        }}
+                                    >
+                                        <ArticleCard article={article} />
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    );
+                })}
                 {/* TODO: Show more button */}
             </div>
         </section>

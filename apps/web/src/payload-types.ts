@@ -71,6 +71,7 @@ export interface Config {
     pages: Page;
     articles: Article;
     concerts: Concert;
+    galleries: Gallery1;
     'article-categories': ArticleCategory;
     genres: Genre;
     volunteers: Volunteer;
@@ -99,6 +100,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     concerts: ConcertsSelect<false> | ConcertsSelect<true>;
+    galleries: GalleriesSelect<false> | GalleriesSelect<true>;
     'article-categories': ArticleCategoriesSelect<false> | ArticleCategoriesSelect<true>;
     genres: GenresSelect<false> | GenresSelect<true>;
     volunteers: VolunteersSelect<false> | VolunteersSelect<true>;
@@ -708,12 +710,54 @@ export interface TextImage {
       | ({
           relationTo: 'article-categories';
           value: string | ArticleCategory;
+        } | null)
+      | ({
+          relationTo: 'galleries';
+          value: string | Gallery1;
         } | null);
     label: string;
   };
   id?: string | null;
   blockName?: string | null;
   blockType: 'text-image';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "galleries".
+ */
+export interface Gallery1 {
+  id: string;
+  /**
+   * This is the name of the page, it will only be used in the admin panel. And is not localized.
+   */
+  name: string;
+  /**
+   * This title will be used in references and will set the slug.
+   */
+  title: string;
+  photographer?: (string | null) | Volunteer;
+  galleryDate?: string | null;
+  venue?: string | null;
+  images?: (string | Media)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  publishStatus: 'draft' | 'pendingApproval' | 'public';
+  slug?: string | null;
+  slugLock?: boolean | null;
+  contentMeta?: {
+    featuredImage?: (string | null) | Media;
+    excerpt?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -739,6 +783,10 @@ export interface ArticleSlider {
       | ({
           relationTo: 'article-categories';
           value: string | ArticleCategory;
+        } | null)
+      | ({
+          relationTo: 'galleries';
+          value: string | Gallery1;
         } | null);
     label: string;
   };
@@ -900,6 +948,10 @@ export interface FeaturedConcerts {
       | ({
           relationTo: 'article-categories';
           value: string | ArticleCategory;
+        } | null)
+      | ({
+          relationTo: 'galleries';
+          value: string | Gallery1;
         } | null);
     label: string;
   };
@@ -942,6 +994,10 @@ export interface VolunteersTeam {
       | ({
           relationTo: 'article-categories';
           value: string | ArticleCategory;
+        } | null)
+      | ({
+          relationTo: 'galleries';
+          value: string | Gallery1;
         } | null);
     label: string;
   };
@@ -1055,6 +1111,10 @@ export interface Navigation {
             | ({
                 relationTo: 'article-categories';
                 value: string | ArticleCategory;
+              } | null)
+            | ({
+                relationTo: 'galleries';
+                value: string | Gallery1;
               } | null);
           label: string;
         };
@@ -1077,6 +1137,10 @@ export interface Navigation {
                   | ({
                       relationTo: 'article-categories';
                       value: string | ArticleCategory;
+                    } | null)
+                  | ({
+                      relationTo: 'galleries';
+                      value: string | Gallery1;
                     } | null);
                 label: string;
               };
@@ -1172,6 +1236,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'concerts';
         value: string | Concert;
+      } | null)
+    | ({
+        relationTo: 'galleries';
+        value: string | Gallery1;
       } | null)
     | ({
         relationTo: 'article-categories';
@@ -1668,6 +1736,38 @@ export interface ConcertsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "galleries_select".
+ */
+export interface GalleriesSelect<T extends boolean = true> {
+  name?: T;
+  title?: T;
+  photographer?: T;
+  galleryDate?: T;
+  venue?: T;
+  images?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  publishStatus?: T;
+  slug?: T;
+  slugLock?: T;
+  contentMeta?:
+    | T
+    | {
+        featuredImage?: T;
+        excerpt?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "article-categories_select".
  */
 export interface ArticleCategoriesSelect<T extends boolean = true> {
@@ -2140,6 +2240,10 @@ export interface Option {
       | ({
           relationTo: 'article-categories';
           value: string | ArticleCategory;
+        } | null)
+      | ({
+          relationTo: 'galleries';
+          value: string | Gallery1;
         } | null);
     label: string;
   };

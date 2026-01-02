@@ -40,6 +40,7 @@ export const routedCollections = [
     'pages',
     'articles',
     'article-categories',
+    'galleries',
 ] as const satisfies readonly CollectionSlug[];
 /**
  * All paths that has to be localized but aren't created as collections in Payload

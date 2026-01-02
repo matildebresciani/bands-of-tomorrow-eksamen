@@ -14,6 +14,7 @@ import { ArticleCategories } from './collections/categories/article-categories/c
 import { Genres } from './collections/categories/article-genres/config';
 import { Articles } from './collections/content/articles/config';
 import { Concerts } from './collections/content/concerts/config';
+import { Galleries } from './collections/content/galleries/config';
 import { Pages } from './collections/content/pages/config';
 import { Faqs } from './collections/entries/faqs/config';
 import { Forms } from './collections/entries/forms/config';
@@ -72,6 +73,7 @@ export default buildConfig({
         Pages,
         Articles,
         Concerts,
+        Galleries,
         ArticleCategories,
         Genres,
         Volunteers,

@@ -207,6 +207,7 @@ export interface Page {
         | MainTeam
         | VolunteersTeam
         | TextCard
+        | GallerySlider
       )[]
     | null;
   meta?: {
@@ -1033,6 +1034,15 @@ export interface TextCard {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GallerySlider".
+ */
+export interface GallerySlider {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery-slider';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "concerts".
  */
 export interface Concert {
@@ -1367,6 +1377,7 @@ export interface PagesSelect<T extends boolean = true> {
         'main-team'?: T | MainTeamSelect<T>;
         'volunteers-team'?: T | VolunteersTeamSelect<T>;
         'text-card'?: T | TextCardSelect<T>;
+        'gallery-slider'?: T | GallerySliderSelect<T>;
       };
   meta?:
     | T
@@ -1594,6 +1605,14 @@ export interface TextCardSelect<T extends boolean = true> {
   addBgColor?: T;
   richText?: T;
   volunteer?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GallerySlider_select".
+ */
+export interface GallerySliderSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }

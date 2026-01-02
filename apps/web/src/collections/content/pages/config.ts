@@ -4,6 +4,7 @@ import { FAQ } from '@/components/organisms/blocks/faq/config';
 import { FeaturedArticle } from '@/components/organisms/blocks/featured-article/config';
 import { FeaturedConcerts } from '@/components/organisms/blocks/featured-concerts/config';
 import { Form } from '@/components/organisms/blocks/form/config';
+import { GallerySlider } from '@/components/organisms/blocks/gallery-slider/config';
 import { HeadingBlock } from '@/components/organisms/blocks/heading/config';
 import { Hero } from '@/components/organisms/blocks/hero/config';
 import { MainTeam } from '@/components/organisms/blocks/main-team/config';
@@ -40,6 +41,7 @@ const blocks: Block[] = [
     MainTeam,
     VolunteersTeam,
     TextCard,
+    GallerySlider,
 ];
 
 export const Pages = createRoutedCollection('pages', {

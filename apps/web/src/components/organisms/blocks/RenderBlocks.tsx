@@ -10,6 +10,7 @@ import FaqBlock from './faq/Faq';
 import FeaturedArticleBlock from './featured-article/FeaturedArticle';
 import FeaturedConcertsBlock from './featured-concerts/FeaturedConcerts';
 import FormBlock from './form/Form';
+import GallerySliderBlock from './gallery-slider/GallerySlider';
 import GalleryBlock from './gallery/Gallery';
 import HeadingBlock from './heading/HeadingBlock';
 import HeroBlock from './hero/Hero';
@@ -48,6 +49,7 @@ const blockComponents = {
     'volunteers-team': VolunteersTeamBlock,
     'featured-concerts': FeaturedConcertsBlock,
     'text-card': TextCardBlock,
+    'gallery-slider': GallerySliderBlock,
 };
 
 export const RenderBlocks: React.FC<{

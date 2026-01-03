@@ -37,8 +37,8 @@ export const Volunteers = createCollection('volunteers', {
             label: 'Type frivillig',
             required: true,
             options: [
-                { label: 'Kernefrivillig', value: 'core' },
-                { label: 'Frivillig', value: 'regular' },
+                { label: 'Redaktionen', value: 'core' },
+                { label: 'Creator', value: 'regular' },
             ],
             defaultValue: 'regular',
             admin: {
@@ -54,6 +54,7 @@ export const Volunteers = createCollection('volunteers', {
                 { label: 'Skribent', value: 'writer' },
                 { label: 'Fotograf', value: 'photographer' },
                 { label: 'SoMe Frivillig', value: 'social' },
+                { label: 'Grafisk design', value: 'design' },
                 { label: 'Andet', value: 'other' },
             ],
             defaultValue: 'writer',

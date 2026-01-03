@@ -4,6 +4,7 @@ import GalleryGrid from '@/components/organisms/gallery/GalleryGrid';
 import { defaultLocale, isLocale } from '@/i18n/localized-collections';
 import { initPayload } from '@/lib/config';
 import { generateEntryMetadata } from '@/lib/data/metadata';
+import { formatDateTime } from '@/lib/utilities/format-date-time';
 import type { Media } from '@/payload-types';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
@@ -48,7 +49,7 @@ export default async function Page({ params }: Props) {
                         <Heading>{gallery.title}</Heading>
 
                         <div className="flex flex-col">
-                            {gallery.galleryDate && <span>{new Date(gallery.galleryDate).toLocaleDateString()}</span>}
+                            {gallery.galleryDate && <span>{formatDateTime(gallery.galleryDate, 'long')}</span>}
                             {photographer && <span>Foto: {photographer.volunteerName}</span>}
                             {gallery.venue && <span>Spillested: {gallery.venue}</span>}
                         </div>

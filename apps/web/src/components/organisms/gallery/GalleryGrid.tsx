@@ -1,9 +1,12 @@
 'use client';
 
+import PaginationButton from '@/components/atoms/frontend/buttons/PaginationButton';
 import { ImageMedia } from '@/components/atoms/frontend/media/ImageMedia';
 import { cn } from '@/lib/utilities/ui';
 import type { Media } from '@/payload-types';
 import React, { useEffect, useState } from 'react';
+import LightboxDesktop from './components/LightboxDesktop';
+import LightboxMobile from './components/LightboxMobile';
 
 type Props = {
     images: Media[];
@@ -37,20 +40,28 @@ export default function GalleryGrid({ images, className }: Props) {
 
     if (!images || images.length === 0) return null;
 
+    const goNext = () => {
+        setActiveIndex((prev) => (prev !== null ? (prev + 1) % images.length : prev));
+    };
+
+    const goPrev = () => {
+        setActiveIndex((prev) => (prev !== null ? (prev - 1 + images.length) % images.length : prev));
+    };
+
     return (
         <>
             {/* GRID */}
-            <div className={cn('columns-2 md:columns-3 gap-4', className)}>
+            <div className={cn('columns-2 md:columns-3 gap-xs md:gap-s', className)}>
                 {images.map((image, index) => (
                     <button
                         key={image.id}
                         type="button"
-                        className="mb-4 break-inside-avoid cursor-zoom-in"
+                        className="mb-xs md:mb-s break-inside-avoid cursor-zoom-in  overflow-hidden"
                         onClick={() => setActiveIndex(index)}
                     >
                         <ImageMedia
                             resource={image}
-                            imgClassName="w-full h-auto"
+                            imgClassName="w-full h-auto transition-transform duration-500 ease-out hover:scale-120"
                             size="100vw, (min-width: 769px) 50vw, (min-width: 1281px) 33vw"
                         />
                     </button>
@@ -58,22 +69,29 @@ export default function GalleryGrid({ images, className }: Props) {
             </div>
 
             {/* LIGHTBOX */}
-            {activeImage && (
-                <button
-                    type="button"
-                    className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
-                    aria-modal="true"
-                    onClick={() => setActiveIndex(null)}
-                >
-                    <div className="max-w-5xl max-h-full">
-                        <ImageMedia
-                            resource={activeImage}
-                            priority
-                            imgClassName="w-auto h-auto max-h-[90vh]"
-                            size="100vw"
+            {activeIndex !== null && (
+                <>
+                    {/* MOBILE */}
+                    <div className="md:hidden">
+                        <LightboxMobile
+                            images={images}
+                            activeIndex={activeIndex}
+                            setActiveIndex={setActiveIndex}
+                            onClose={() => setActiveIndex(null)}
                         />
                     </div>
-                </button>
+
+                    {/* DESKTOP */}
+                    <div className="hidden md:block">
+                        <LightboxDesktop
+                            images={images}
+                            activeIndex={activeIndex}
+                            onClose={() => setActiveIndex(null)}
+                            onNext={goNext}
+                            onPrev={goPrev}
+                        />
+                    </div>
+                </>
             )}
         </>
     );

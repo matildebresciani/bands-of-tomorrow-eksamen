@@ -58,7 +58,7 @@ export const getDefaultOgImage = async (locale: Locale) => {
     return null;
 };
 
-type CollectionSingleTypes = 'pages' | 'articles';
+type CollectionSingleTypes = 'pages' | 'articles' | 'galleries';
 export const generateEntryMetadata = async (slug: string, collection: CollectionSingleTypes, locale: Locale) => {
     const meta: Metadata = {};
     const options = await getCachedOptions(locale);

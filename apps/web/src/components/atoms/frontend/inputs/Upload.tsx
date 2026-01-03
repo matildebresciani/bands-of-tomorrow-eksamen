@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { useId, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FieldBase from './FieldBase';
+import File from './File';
 
 interface Props {
     label: string;
@@ -40,6 +41,17 @@ const UploadField = ({ label, name, isRequired, buttonLabel, placeholder, maxFil
         setValue(name, dataTransfer.files, { shouldValidate: true });
     };
 
+    const removeFile = (indexToRemove: number) => {
+        if (!files) return;
+
+        const remainingFiles = Array.from(files).filter((_, index) => index !== indexToRemove);
+
+        const dt = new DataTransfer();
+        remainingFiles.forEach((file) => dt.items.add(file));
+
+        setValue(name, dt.files, { shouldValidate: true });
+    };
+
     return (
         <FieldBase label={label} isRequired={isRequired} error={error} inputId={id} errorId={errorId}>
             <input
@@ -50,6 +62,11 @@ const UploadField = ({ label, name, isRequired, buttonLabel, placeholder, maxFil
                 ref={(e) => {
                     rhfRef(e);
                     inputRef.current = e;
+                }}
+                onChange={(e) => {
+                    handleFileChange(e.target.files);
+                    // reset input value, så samme fil kan vælges igen
+                    e.target.value = '';
                 }}
                 className="hidden"
                 aria-labelledby={`${name}-label`}
@@ -89,16 +106,12 @@ const UploadField = ({ label, name, isRequired, buttonLabel, placeholder, maxFil
                 {hasFiles ? (
                     <div className="flex flex-col items-center justify-center w-full space-y-6">
                         <ul className="list-none p-0 m-0 w-full max-w-sm max-h-32 overflow-y-auto space-y-2 text-center">
-                            {Array.from(files).map((file) => (
-                                <li
+                            {Array.from(files).map((file, index) => (
+                                <File
                                     key={file.name + file.size}
-                                    className="text-sm flex items-center justify-between gap-2 bg-white p-xs border border-border-base"
-                                >
-                                    <span className="truncate">{file.name}</span>
-                                    <button type="button" className="text-red-500 hover:text-red-700">
-                                        <X />
-                                    </button>
-                                </li>
+                                    fileName={file.name}
+                                    onRemove={() => removeFile(index)}
+                                />
                             ))}
                         </ul>
                         <div className="flex flex-col items-center w-full mt-4">

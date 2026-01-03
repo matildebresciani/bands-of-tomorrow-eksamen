@@ -4,17 +4,19 @@ import { formatLink } from '@/lib/utilities/format-link';
 import { cn } from '@/lib/utilities/ui';
 import type { Option } from '@/payload-types';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 type Props = {
-    link: Option['linkTypeTemplate'];
+    link?: Option['linkTypeTemplate'];
     className?: string;
     variant?: 'primary' | 'primaryOnColor' | 'secondary' | 'tertiary';
     locale?: Locale;
     onClick?: () => void;
+    children?: React.ReactNode;
 };
 
-const DynamicButton = ({ link, className, variant = 'primary', locale, onClick }: Props) => {
-    const { type, label, url, openNewTab } = link;
+const DynamicButton = ({ link, className, variant = 'primary', locale, onClick, children }: Props) => {
+    //const { type, label, url, openNewTab } = link;
 
     const buttonStyle = cn(
         'inline-flex cursor-pointer w-auto button-text p-xs sm:p-s transition-colors duration-200',
@@ -28,15 +30,53 @@ const DynamicButton = ({ link, className, variant = 'primary', locale, onClick }
         className,
     );
 
+    //     if (type === 'custom' && url) {
+    //         return (
+    //             <Link
+    //                 href={url}
+    //                 className={buttonStyle}
+    //                 target={openNewTab ? '_blank' : '_self'}
+    //                 onClick={() => onClick?.()}
+    //             >
+    //                 {label}
+    //             </Link>
+    //         );
+    //     }
+
+    //     if (type === 'reference') {
+    //         return (
+    //             <Link
+    //                 href={formatLink(link, locale ?? 'da')}
+    //                 className={buttonStyle}
+    //                 target={openNewTab ? '_blank' : '_self'}
+    //                 onClick={() => onClick?.()}
+    //             >
+    //                 {label}
+    //             </Link>
+    //         );
+    //     }
+    // };
+
+    // export default DynamicButton;
+
+    //Almindelig button
+    if (!link) {
+        return (
+            <button onClick={onClick} className={buttonStyle} type="button">
+                {children}
+            </button>
+        );
+    }
+
+    const { type, label, url, openNewTab } = link;
+
+    //Link
+    const content = children ?? label;
+
     if (type === 'custom' && url) {
         return (
-            <Link
-                href={url}
-                className={buttonStyle}
-                target={openNewTab ? '_blank' : '_self'}
-                onClick={() => onClick?.()}
-            >
-                {label}
+            <Link href={url} className={buttonStyle} target={openNewTab ? '_blank' : '_self'} onClick={onClick}>
+                {content}
             </Link>
         );
     }
@@ -47,12 +87,14 @@ const DynamicButton = ({ link, className, variant = 'primary', locale, onClick }
                 href={formatLink(link, locale ?? 'da')}
                 className={buttonStyle}
                 target={openNewTab ? '_blank' : '_self'}
-                onClick={() => onClick?.()}
+                onClick={onClick}
             >
-                {label}
+                {content}
             </Link>
         );
     }
+
+    return null;
 };
 
 export default DynamicButton;

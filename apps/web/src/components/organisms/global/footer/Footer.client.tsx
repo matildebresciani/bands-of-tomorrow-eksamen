@@ -4,7 +4,6 @@ import Instagram from '@/components/atoms/frontend/icons/Instagram';
 import LogoLink from '@/components/atoms/frontend/logo/Link';
 import type { Navigation as NavigationProps } from '@/payload-types';
 import { motion } from 'motion/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
 import BaseBlock from '../../blocks/base-block/BaseBlock';
@@ -28,12 +27,12 @@ export const FooterClient: React.FC<FooterClientProps> = ({ footer1, footer2, fo
                     {footer3 && <Navigation data={footer3} />}
                 </div>
                 <div className="flex gap-5 z-23">
-                    <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+                    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} transition={{ duration: 0.2 }}>
                         <Link href="https://www.instagram.com/bandsoftomorrow/?hl=en">
                             <Instagram />
                         </Link>
                     </motion.div>
-                    <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+                    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} transition={{ duration: 0.2 }}>
                         <Link href="https://www.facebook.com/bandsoftomorrow/">
                             <Facebook />
                         </Link>

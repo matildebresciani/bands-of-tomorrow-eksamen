@@ -51,6 +51,7 @@ export default function SearchBar() {
             <motion.button
                 onClick={() => setOpen(true)}
                 whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
                 transition={{ duration: 0.2 }}
                 className="cursor-pointer"
                 aria-label="search button"

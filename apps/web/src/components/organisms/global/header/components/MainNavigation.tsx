@@ -4,6 +4,7 @@ import type { Locale } from '@/i18n/localized-collections';
 import { formatLink } from '@/lib/utilities/format-link';
 import { cn } from '@/lib/utilities/ui';
 import type { Navigation } from '@/payload-types';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -20,17 +21,24 @@ const MainNavigation = ({ data, locale }: Props) => {
             {data?.map((item, i) => {
                 const itemLink = formatLink(item.link, locale);
                 return (
-                    <Link
+                    <motion.div
                         key={item.id ?? i}
-                        href={itemLink}
-                        className={cn(
-                            'hover:text-bg-highlight nav-text',
-                            itemLink === pathname && 'bg-bg-highlight h-fit text-button-text hover:text-button-text',
-                        )}
-                        target={item.link.openNewTab ? '_blank' : '_self'}
+                        whileHover={{ scale: 1.08 }}
+                        whileTap={{ scale: 0.9 }}
+                        transition={{ duration: 0.2 }}
                     >
-                        {item.link.label}
-                    </Link>
+                        <Link
+                            href={itemLink}
+                            className={cn(
+                                'hover:text-bg-highlight nav-text',
+                                itemLink === pathname &&
+                                    'bg-bg-highlight h-fit text-button-text hover:text-button-text',
+                            )}
+                            target={item.link.openNewTab ? '_blank' : '_self'}
+                        >
+                            {item.link.label}
+                        </Link>
+                    </motion.div>
                 );
             })}
         </nav>

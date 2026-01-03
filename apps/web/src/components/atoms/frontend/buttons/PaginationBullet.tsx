@@ -1,3 +1,5 @@
+import { motion } from 'motion/react';
+
 type Props = {
     active?: boolean;
     onClick?: () => void;
@@ -5,7 +7,11 @@ type Props = {
 
 const PaginationBullet = ({ active, onClick }: Props) => {
     return (
-        <button
+        <motion.button
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            animate={{ scale: active ? 1.2 : 1 }}
+            transition={{ duration: 0.2 }}
             type="button"
             aria-label="pagination bullet button"
             onClick={onClick}
@@ -19,7 +25,7 @@ const PaginationBullet = ({ active, onClick }: Props) => {
                     ${active ? 'bg-button-primary' : 'bg-transparent'}
                 `}
             />
-        </button>
+        </motion.button>
     );
 };
 

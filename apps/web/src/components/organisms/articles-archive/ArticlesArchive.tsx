@@ -1,12 +1,17 @@
 'use client';
 
+import BaseButton from '@/components/atoms/frontend/buttons/BaseButton';
 import ArticleCard from '@/components/molecules/frontend/article-cards/ArticleCard';
 import type { Article } from '@/payload-types';
 import { motion } from 'motion/react';
+import { useState } from 'react';
 
 type Props = {
     articles: Article[];
 };
+
+const INITIAL_COUNT = 6;
+const LOAD_MORE_COUNT = 3;
 
 const chunkArray = <T,>(array: T[], size: number): T[][] => {
     const chunks: T[][] = [];
@@ -25,26 +30,30 @@ const rowVariants = {
     },
 };
 
-const cardVariants = {
-    hidden: {
-        opacity: 0,
-        y: 40,
-    },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 0.45,
-            ease: 'easeOut',
-        },
-    },
-};
+// const cardVariants = {
+//     hidden: {
+//         opacity: 0,
+//         y: 40,
+//     },
+//     show: {
+//         opacity: 1,
+//         y: 0,
+//         transition: {
+//             duration: 0.45,
+//             ease: 'easeOut',
+//         },
+//     },
+// };
 
 const ArticlesArchive = ({ articles }: Props) => {
     if (!articles?.length) return null;
 
-    const gridArticles = articles.slice(1);
+    const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
+    const gridArticles = articles.slice(1, visibleCount + 1);
     const rows = chunkArray(gridArticles, 3);
+
+    const hasMore = visibleCount < articles.length - 1;
 
     return (
         <section className="space-y-section-sm">
@@ -95,6 +104,13 @@ const ArticlesArchive = ({ articles }: Props) => {
                     );
                 })}
                 {/* TODO: Show more button */}
+                {hasMore && (
+                    <div className="flex justify-center pt-section-xs">
+                        <BaseButton onClick={() => setVisibleCount((prev) => prev + LOAD_MORE_COUNT)}>
+                            Vis flere artikler
+                        </BaseButton>
+                    </div>
+                )}
             </div>
         </section>
     );

@@ -31,8 +31,32 @@ const TextImageBlock: BC<TextImageProps> = ({ block, locale }) => {
                 <div className={imageColClasses}>
                     {/* Single Image */}
                     {mode === 'addImageSingle' && (
+                        // <div className="relative w-full aspect-[4/3] overflow-hidden">
+                        //     <ImageMedia resource={image} imgClassName="w-full h-full object-cover filter grayscale" />
+                        // </div>
                         <div className="relative w-full aspect-[4/3] overflow-hidden">
                             <ImageMedia resource={image} imgClassName="w-full h-full object-cover filter grayscale" />
+                            {/* Noise overlay */}
+                            <div className="absolute inset-0 pointer-events-none">
+                                {/* Noise overlay */}
+                                <svg
+                                    className="absolute inset-0 w-full h-full pointer-events-none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    preserveAspectRatio="none"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                >
+                                    <filter id="noiseFilter">
+                                        <feTurbulence
+                                            type="fractalNoise"
+                                            baseFrequency="0.8"
+                                            numOctaves="3"
+                                            stitchTiles="stitch"
+                                        />
+                                    </filter>
+                                    <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+                                </svg>
+                            </div>
                         </div>
                     )}
                     {/* Duplicate Image */}
@@ -41,6 +65,27 @@ const TextImageBlock: BC<TextImageProps> = ({ block, locale }) => {
                             {/* bageste boks + billede */}
                             <div className="absolute top-0 left-0 w-[90%] h-[90%] aspect-[4/3] bg-bg-section-2 overflow-hidden">
                                 <ImageMedia resource={image} imgClassName="w-full h-full object-cover aspect-[4/3]" />
+                                {/* Noise overlay */}
+                                <div className="absolute inset-0 pointer-events-none">
+                                    {/* Noise overlay */}
+                                    <svg
+                                        className="absolute inset-0 w-full h-full pointer-events-none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        preserveAspectRatio="none"
+                                        aria-hidden="true"
+                                        focusable="false"
+                                    >
+                                        <filter id="noiseFilter">
+                                            <feTurbulence
+                                                type="fractalNoise"
+                                                baseFrequency="0.8"
+                                                numOctaves="3"
+                                                stitchTiles="stitch"
+                                            />
+                                        </filter>
+                                        <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+                                    </svg>
+                                </div>
                                 <div className="absolute inset-0 pointer-events-none mix-blend-screen bg-overlay-red" />
                             </div>
 
@@ -51,6 +96,27 @@ const TextImageBlock: BC<TextImageProps> = ({ block, locale }) => {
                                         resource={image}
                                         imgClassName="w-full h-full object-cover filter grayscale"
                                     />
+                                    {/* Noise overlay */}
+                                    <div className="absolute inset-0 pointer-events-none">
+                                        {/* Noise overlay */}
+                                        <svg
+                                            className="absolute inset-0 w-full h-full pointer-events-none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            preserveAspectRatio="none"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        >
+                                            <filter id="noiseFilter">
+                                                <feTurbulence
+                                                    type="fractalNoise"
+                                                    baseFrequency="0.8"
+                                                    numOctaves="3"
+                                                    stitchTiles="stitch"
+                                                />
+                                            </filter>
+                                            <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>

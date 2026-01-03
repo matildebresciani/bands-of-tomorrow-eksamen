@@ -4,6 +4,7 @@ import { initPayload } from '@/lib/config';
 import type { BC } from '@/lib/types/block-props';
 import type { GallerySlider as GallerySliderProps } from '@/payload-types';
 import BaseBlock from '../base-block/BaseBlock';
+import BackgroundHeadings from './BackgroundHeadings';
 import GallerySliderClient from './GallerySlider.client';
 
 const GallerySliderBlock: BC<GallerySliderProps> = async ({ block }) => {
@@ -21,12 +22,11 @@ const GallerySliderBlock: BC<GallerySliderProps> = async ({ block }) => {
         <BaseBlock classNameOuter="overflow-hidden">
             <div className="oakgrid">
                 <div className="col-span-12">
-                    <Heading level={2} className="mb-section-xxs uppercase">
-                        Gallerier
-                    </Heading>
-
                     <div className="relative max-w-full">
-                        <GallerySliderClient galleries={galleriesRes.docs} />
+                        <BackgroundHeadings />
+                        <div className="relative max-w-full z-10 pt-section-xs">
+                            <GallerySliderClient galleries={galleriesRes.docs} />
+                        </div>
                     </div>
                 </div>
             </div>

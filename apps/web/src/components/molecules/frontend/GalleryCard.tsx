@@ -29,9 +29,9 @@ const GalleryCard = ({ gallery }: Props) => {
                     />
                 </div>
 
-                <div className="p-s flex flex-col">
-                    <h3 className="heading-5">{gallery.title}</h3>
+                <div className="p-s flex flex-col bg-bg-base gap-1 body-sm">
                     {gallery.galleryDate && <span>{formatDateTime(gallery.galleryDate, 'long')}</span>}
+                    <h3 className="heading-5">{gallery.title}</h3>
                     {gallery.venue && <span>{gallery.venue}</span>}
                 </div>
             </div>

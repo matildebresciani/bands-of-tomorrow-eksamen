@@ -62,7 +62,7 @@ const VolunteersTeamBlock: BC<VolunteersTeamProps> = ({ block, locale }) => {
                     {hasMoreThanVisible && (
                         <div className="flex justify-center mt-m">
                             <DynamicButton variant="tertiary" onClick={() => setIsOpen((prev) => !prev)}>
-                                {isOpen ? '- Luk listen' : '+ Åben hele listen'}
+                                {isOpen ? '- Vis færre frivillige' : '+ Vis flere frivillige'}
                             </DynamicButton>
                         </div>
                     )}

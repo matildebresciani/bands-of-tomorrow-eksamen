@@ -53,7 +53,13 @@ const TextImageBlock: BC<TextImageProps> = ({ block, locale }) => {
                                             numOctaves="3"
                                             stitchTiles="stitch"
                                         />
+                                        <feComponentTransfer>
+                                            <feFuncR type="linear" slope="0.3" />
+                                            <feFuncG type="linear" slope="0.3" />
+                                            <feFuncB type="linear" slope="0.3" />
+                                        </feComponentTransfer>
                                     </filter>
+
                                     <rect width="100%" height="100%" filter="url(#noiseFilter)" />
                                 </svg>
                             </div>
@@ -64,7 +70,10 @@ const TextImageBlock: BC<TextImageProps> = ({ block, locale }) => {
                         <div className="relative w-full max-w-[591px] mx-auto">
                             {/* bageste boks + billede */}
                             <div className="absolute top-0 left-0 w-[90%] h-[90%] aspect-[4/3] bg-bg-section-2 overflow-hidden">
-                                <ImageMedia resource={image} imgClassName="w-full h-full object-cover aspect-[4/3]" />
+                                <ImageMedia
+                                    resource={image}
+                                    imgClassName="w-full h-full object-cover aspect-[4/3] grayscale"
+                                />
                                 {/* Noise overlay */}
                                 <div className="absolute inset-0 pointer-events-none">
                                     {/* Noise overlay */}

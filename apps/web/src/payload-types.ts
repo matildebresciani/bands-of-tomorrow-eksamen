@@ -482,7 +482,7 @@ export interface Volunteer {
   volunteerName: string;
   displayName?: string | null;
   roleGroup: 'core' | 'regular';
-  volunteerRole: 'writer' | 'photographer' | 'social' | 'other';
+  volunteerRole: 'writer' | 'photographer' | 'social' | 'design' | 'other';
   customRole?: string | null;
   email?: string | null;
   profilePicture?: (string | null) | Media;

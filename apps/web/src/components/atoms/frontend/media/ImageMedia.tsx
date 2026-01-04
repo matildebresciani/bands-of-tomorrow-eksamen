@@ -65,7 +65,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
             placeholder="blur"
             blurDataURL={placeholderBlur}
             priority={priority}
-            quality={75}
+            quality={100}
             loading={loading}
             fetchPriority={loading !== 'lazy' ? 'high' : undefined} // <-- Tilføjer fetchpriority high, hvis loading ikke er lazy
             sizes={sizes}

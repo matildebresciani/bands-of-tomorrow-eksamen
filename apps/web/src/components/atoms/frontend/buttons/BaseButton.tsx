@@ -1,5 +1,6 @@
 'use client';
 import { cn } from '@/lib/utilities/ui';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 
 export type BaseButtonProps = {
@@ -32,30 +33,40 @@ const BaseButton = ({
             'bg-button-primary-on-color text-button-text-on-subtle hover:bg-button-primary-on-color-hover p-s justify-center',
         variant === 'secondary' &&
             'bg-button-secondary text-button-text hover:bg-button-secondary-hover p-s justify-center',
-        variant === 'tertiary' &&
-            'text-fg-highlight-2 transition-transform duration-300 hover:scale-120 hover:underline',
+        variant === 'tertiary' && 'text-fg-highlight-2 hover:underline',
         className,
     );
 
     const content = children ?? title;
 
+    const MotionLink = motion.create(Link); //Tilføjer motion animation til <Link>
+
     if (type === 'link' && href) {
         return (
-            <Link href={href} className={style} target={openNewTab ? '_blank' : '_self'} onClick={() => onClick?.()}>
+            <MotionLink
+                whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.9 }}
+                href={href}
+                className={style}
+                target={openNewTab ? '_blank' : '_self'}
+                onClick={() => onClick?.()}
+            >
                 {content}
-            </Link>
+            </MotionLink>
         );
     }
 
     return (
-        <button
+        <motion.button
+            whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.9 }}
             type={type && type !== 'link' ? type : 'button'}
             className={style}
             onClick={() => onClick?.()}
             disabled={disabled}
         >
             {content}
-        </button>
+        </motion.button>
     );
 };
 

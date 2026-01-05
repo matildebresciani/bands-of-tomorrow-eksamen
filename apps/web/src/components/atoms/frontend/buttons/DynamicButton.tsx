@@ -3,6 +3,7 @@ import type { Locale } from '@/i18n/localized-collections';
 import { formatLink } from '@/lib/utilities/format-link';
 import { cn } from '@/lib/utilities/ui';
 import type { Option } from '@/payload-types';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
@@ -26,8 +27,7 @@ const DynamicButton = ({ link, className, variant = 'primary', locale, onClick, 
             'bg-button-primary-on-color text-button-text-on-subtle hover:bg-button-primary-on-color-hover p-s justify-center',
         variant === 'secondary' &&
             'bg-button-secondary text-button-text hover:bg-button-secondary-hover justify-center',
-        variant === 'tertiary' &&
-            'text-fg-highlight-2 transition-transform duration-300 hover:scale-120 hover:underline',
+        variant === 'tertiary' && 'text-fg-highlight-2 hover:underline',
         className,
     );
 
@@ -63,35 +63,38 @@ const DynamicButton = ({ link, className, variant = 'primary', locale, onClick, 
     //Almindelig button
     if (!link) {
         return (
-            <button onClick={onClick} className={buttonStyle} type="button">
+            <motion.button onClick={onClick} className={buttonStyle} type="button">
                 {children}
-            </button>
+            </motion.button>
         );
     }
 
     const { type, label, url, openNewTab } = link;
+    const MotionLink = motion(Link); //Tilføjer motion animation til <Link>
 
     //Link
     const content = children ?? label;
 
     if (type === 'custom' && url) {
         return (
-            <Link href={url} className={buttonStyle} target={openNewTab ? '_blank' : '_self'} onClick={onClick}>
+            <MotionLink href={url} className={buttonStyle} target={openNewTab ? '_blank' : '_self'} onClick={onClick}>
                 {content}
-            </Link>
+            </MotionLink>
         );
     }
 
     if (type === 'reference') {
         return (
-            <Link
+            <MotionLink
+                whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.9 }}
                 href={formatLink(link, locale ?? 'da')}
                 className={buttonStyle}
                 target={openNewTab ? '_blank' : '_self'}
                 onClick={onClick}
             >
                 {content}
-            </Link>
+            </MotionLink>
         );
     }
 

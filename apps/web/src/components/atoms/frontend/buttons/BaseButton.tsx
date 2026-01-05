@@ -8,7 +8,7 @@ export type BaseButtonProps = {
     href?: string;
     openNewTab?: boolean | null;
     className?: string;
-    variant?: 'primary' | 'primaryOnColor' | 'secondary';
+    variant?: 'primary' | 'primaryOnColor' | 'secondary' | 'tertiary';
     onClick?: () => void;
     children?: React.ReactNode;
     disabled?: boolean;
@@ -32,6 +32,7 @@ const BaseButton = ({
             'bg-button-primary-on-color text-button-text-on-subtle hover:bg-button-primary-on-color-hover p-s justify-center',
         variant === 'secondary' &&
             'bg-button-secondary text-button-text hover:bg-button-secondary-hover p-s justify-center',
+        variant === 'tertiary' && 'underline text-fg-highlight-2 transition-transform duration-300 hover:scale-120',
         className,
     );
 

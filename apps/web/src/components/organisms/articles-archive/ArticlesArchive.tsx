@@ -106,7 +106,10 @@ const ArticlesArchive = ({ articles }: Props) => {
                 {/* TODO: Show more button */}
                 {hasMore && (
                     <div className="flex justify-center pt-section-xs">
-                        <BaseButton onClick={() => setVisibleCount((prev) => prev + LOAD_MORE_COUNT)}>
+                        <BaseButton
+                            variant="tertiary"
+                            onClick={() => setVisibleCount((prev) => prev + LOAD_MORE_COUNT)}
+                        >
                             Vis flere artikler
                         </BaseButton>
                     </div>

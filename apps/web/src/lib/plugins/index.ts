@@ -30,7 +30,7 @@ export const plugins: Plugin[] = [
         generateTitle,
         generateURL,
     }),
-    payloadCloudPlugin(),
+    //payloadCloudPlugin(),
     vercelBlobStorage({
         enabled: process.env.NODE_ENV === 'production',
         //enabled: true,

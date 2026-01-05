@@ -24,7 +24,7 @@ const FormBlock: BC<FormProps> = async ({ block, locale }) => {
                 )}
                 <div
                     className={cn(
-                        'space-y-l',
+                        'space-y-l z-5',
                         layout === 'one-column' && 'col-span-12 md:col-start-4 md:col-span-6 justify-center mb-l',
                         layout === 'two-columns' && 'col-span-12 md:col-span-5',
                     )}

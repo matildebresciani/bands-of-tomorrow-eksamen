@@ -30,14 +30,14 @@ const ConcertsList = ({ concerts, className }: Props) => {
     return (
         <div className={className}>
             {Object.entries(groupedByMonth).map(([month, concerts]) => (
-                <div key={month} className="oakgrid auto-rows-max mb-section-l">
+                <div key={month} className="oakgrid auto-rows-max">
                     {/* Sticky heading i venstre kolonne */}
                     <h2 className="heading-xl h-fit col-span-12 md:col-span-3 md:sticky top-[var(--header-height)] md:top-[var(--header-height-desktop)] text-center uppercase md:text-start mb-section-xs md:mb-0 w-fit z-10">
                         {month}
                     </h2>
 
                     {/* Concert cards i højre kolonne som flex-column */}
-                    <div className="col-span-12 md:col-start-5 md:col-span-8 flex flex-col gap-y-m">
+                    <div className="col-span-12 md:col-start-5 md:col-span-8 flex flex-col">
                         {concerts.map((concert, idx) => (
                             <ConcertCard key={concert.id} concert={concert} index={idx} />
                         ))}

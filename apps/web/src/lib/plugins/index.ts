@@ -34,7 +34,7 @@ export const plugins: Plugin[] = [
     vercelBlobStorage({
         // enabled: process.env.NODE_ENV === 'production',
         enabled: true,
-        // Specify which collections should use Vercel Blob
+        // Specify which collections should use Vercel Blob Storage
         collections: {
             media: true,
         },

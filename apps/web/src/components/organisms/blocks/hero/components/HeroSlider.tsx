@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/effect-creative';
 import CardLabel from '@/components/atoms/frontend/labels/CardLabel';
 import PaginationBullets from '@/components/molecules/frontend/PaginationBullets';
+import { formatDateTime } from '@/lib/utilities/format-date-time';
 import { formatArticleLabel } from '@/lib/utilities/format-label';
 import { getArticleUrl } from '@/lib/utilities/get-article-url';
 import { AnimatePresence, motion } from 'motion/react';
@@ -115,6 +116,12 @@ const HeroSlider = ({ featuredArticles }: Props) => {
                                         reviewType={activeHeroSlide.reviewType}
                                     />
                                 </div>
+
+                                {activeHeroSlide.publishedAt && (
+                                    <span className="col-span-12 mb-xs body-md">
+                                        {formatDateTime(activeHeroSlide.publishedAt, 'long')}
+                                    </span>
+                                )}
                                 {/* TITLE */}
                                 <h3 className="col-span-12">{activeHeroSlide.title}</h3>
 

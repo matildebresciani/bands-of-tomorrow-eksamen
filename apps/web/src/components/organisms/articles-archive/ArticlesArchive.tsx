@@ -103,9 +103,8 @@ const ArticlesArchive = ({ articles }: Props) => {
                         </motion.div>
                     );
                 })}
-                {/* TODO: Show more button */}
                 {hasMore && (
-                    <div className="flex justify-center pt-section-xs">
+                    <div className="flex justify-center">
                         <BaseButton
                             variant="tertiary"
                             onClick={() => setVisibleCount((prev) => prev + LOAD_MORE_COUNT)}

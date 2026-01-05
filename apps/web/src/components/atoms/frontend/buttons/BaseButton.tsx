@@ -1,5 +1,6 @@
 'use client';
 import { cn } from '@/lib/utilities/ui';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 
 export type BaseButtonProps = {
@@ -48,14 +49,16 @@ const BaseButton = ({
     }
 
     return (
-        <button
+        <motion.button
+            whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.9 }}
             type={type && type !== 'link' ? type : 'button'}
             className={style}
             onClick={() => onClick?.()}
             disabled={disabled}
         >
             {content}
-        </button>
+        </motion.button>
     );
 };
 

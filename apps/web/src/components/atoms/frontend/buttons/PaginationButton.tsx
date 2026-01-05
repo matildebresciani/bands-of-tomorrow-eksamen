@@ -1,6 +1,7 @@
 'use client';
 import { cn } from '@/lib/utilities/ui';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
 
 type Props = {
     action: 'prev' | 'next';
@@ -15,10 +16,17 @@ const PaginationButton = ({ action, className, onClick }: Props) => {
     );
 
     return (
-        <button type="button" aria-label="pagination arrow button" className={style} onClick={() => onClick?.()}>
+        <motion.button
+            whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.9 }}
+            type="button"
+            aria-label="pagination arrow button"
+            className={style}
+            onClick={() => onClick?.()}
+        >
             {action === 'prev' && <ArrowLeft />}
             {action === 'next' && <ArrowRight />}
-        </button>
+        </motion.button>
     );
 };
 

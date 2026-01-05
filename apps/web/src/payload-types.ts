@@ -737,7 +737,7 @@ export interface Gallery1 {
    */
   title: string;
   photographer?: (string | null) | Volunteer;
-  galleryDate?: string | null;
+  galleryDate: string;
   venue?: string | null;
   images?: (string | Media)[] | null;
   meta?: {

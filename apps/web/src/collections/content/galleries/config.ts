@@ -40,7 +40,15 @@ export const Galleries: CollectionConfig = createRoutedCollection('galleries', {
                             name: 'galleryDate',
                             label: 'Dato',
                             type: 'date',
+                            required: true,
+                            admin: {
+                                date: {
+                                    pickerAppearance: 'dayOnly',
+                                    displayFormat: 'd MMMM yyy',
+                                },
+                            },
                         },
+
                         {
                             type: 'text',
                             name: 'venue',

@@ -14,7 +14,7 @@ const GallerySliderBlock: BC<GallerySliderProps> = async ({ block }) => {
 
     const galleriesRes = await payload.find({
         collection: 'galleries',
-        sort: '-publishedAt',
+        sort: '-galleryDate',
         limit: 10,
     });
 

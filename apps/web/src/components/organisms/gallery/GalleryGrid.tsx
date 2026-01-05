@@ -15,7 +15,6 @@ type Props = {
 
 export default function GalleryGrid({ images, className }: Props) {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
-    const activeImage = activeIndex !== null ? images[activeIndex] : null;
 
     useEffect(() => {
         if (activeIndex === null) return;

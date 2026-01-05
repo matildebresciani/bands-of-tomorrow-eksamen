@@ -6,10 +6,14 @@ import Link from 'next/link';
 
 type Props = {
     gallery: Gallery1;
+    index?: number;
 };
 
-const GalleryCard = ({ gallery }: Props) => {
+const GalleryCard = ({ gallery, index }: Props) => {
     const firstImage = gallery.images?.find((img): img is Media => typeof img === 'object') ?? null;
+
+    const overlayColor =
+        typeof index === 'number' ? (index % 2 === 0 ? 'bg-overlay-blue' : 'bg-overlay-red') : 'bg-overlay-blue';
     return (
         <Link href={`/galleri/${gallery.slug}`} className="group block">
             <div className="border flex flex-col h-full">
@@ -24,7 +28,8 @@ const GalleryCard = ({ gallery }: Props) => {
                     )}
                     <div
                         className={cn(
-                            'absolute inset-0 pointer-events-none mix-blend-screen opacity-100 transition-opacity duration-300 group-hover:opacity-0 bg-overlay-blue',
+                            'absolute inset-0 pointer-events-none mix-blend-screen opacity-100 transition-opacity duration-300 group-hover:opacity-0',
+                            overlayColor,
                         )}
                     />
                 </div>

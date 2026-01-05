@@ -18,7 +18,7 @@ const GallerySliderClient = ({ galleries }: Props) => {
     return (
         <div>
             {galleries.length > 4 && (
-                <div className="hidden md:block absolute left-0 top-1/3 transform -translate-x-1/2 z-10">
+                <div className="hidden md:block absolute left-0 top-1/2 transform -translate-x-1/2 z-10">
                     <PaginationButton action="prev" onClick={() => swiperRef.current?.slidePrev()} />
                 </div>
             )}
@@ -41,14 +41,14 @@ const GallerySliderClient = ({ galleries }: Props) => {
                 }}
                 className="!overflow-visible md:!overflow-hidden"
             >
-                {galleries.map((gallery) => (
+                {galleries.map((gallery, i) => (
                     <SwiperSlide key={gallery.id} className="w-full !h-auto">
-                        <GalleryCard gallery={gallery} />
+                        <GalleryCard gallery={gallery} index={i} />
                     </SwiperSlide>
                 ))}
             </Swiper>
             {galleries.length > 4 && (
-                <div className="hidden md:block absolute right-0 top-1/3 transform translate-x-1 lg:translate-x-1/2 z-10">
+                <div className="hidden md:block absolute right-0 top-1/2 transform translate-x-1 lg:translate-x-1/2 z-10">
                     <PaginationButton action="next" onClick={() => swiperRef.current?.slideNext()} />
                 </div>
             )}

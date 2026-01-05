@@ -14,7 +14,7 @@ const TextCardBlock: BC<TextCardProps> = ({ block, locale }) => {
         >
             <div className="oakgrid">
                 <div className="col-span-12 md:col-span-7">{richText && <RichText data={richText} />}</div>
-                <div className="col-span-12 md:col-span-4">
+                <div className="col-span-12 md:col-start-9 md:col-span-4">
                     {typeof volunteer !== 'string' && volunteer && <VolunteerCard volunteer={volunteer} />}
                 </div>
             </div>

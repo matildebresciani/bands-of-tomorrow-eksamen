@@ -26,7 +26,8 @@ const DynamicButton = ({ link, className, variant = 'primary', locale, onClick, 
             'bg-button-primary-on-color text-button-text-on-subtle hover:bg-button-primary-on-color-hover p-s justify-center',
         variant === 'secondary' &&
             'bg-button-secondary text-button-text hover:bg-button-secondary-hover justify-center',
-        variant === 'tertiary' && 'underline text-fg-highlight-2 transition-transform duration-300 hover:scale-120',
+        variant === 'tertiary' &&
+            'text-fg-highlight-2 transition-transform duration-300 hover:scale-120 hover:underline',
         className,
     );
 

@@ -38,15 +38,15 @@
     
     --fg-base: #33261C;
     --fg-on-color: #FBF8F1;
-    --fg-subtle: #BDC9E7;
+    --fg-subtle: #E5EDFF;
     --fg-faded: #403B3B;
     --fg-highlight: #3D59B0; 
-    --fg-highlight-2: #DF4739;
+    --fg-highlight-2: #AE1111;
 
-    --button-primary:#DF4739;
+    --button-primary:#AE1111;
     --button-primary-on-color: #FBF8F1;
     --button-secondary: #3D59B0; 
-    --button-primary-hover: #943128;
+    --button-primary-hover: #660D0D;
     --button-primary-on-color-hover: #BDC9E7;
     --button-secondary-hover: #344571;
     --button-subtle: #D8D5CD;
@@ -54,7 +54,7 @@
     --button-text: #FBF8F1;
     --button-text-on-subtle: #33261C;
 
-    --bg-label-red: #DF4739;
+    --bg-label-red: #AE1111;
     --bg-label-blue: #3D59B0;
     --bg-label-lightblue: #BDC9E7;
     --bg-label-dark: #33261C;
@@ -106,3 +106,19 @@ body {
     font-family: var(--font-body);
     color: var(--fg-base);
 }
+article {
+        .payload-richtext {
+        > p {
+            > a {
+                display: inline-block;
+                text-decoration: underline;
+                color: var(--button-primary);
+                transition: transform 0.2s ease;
+
+                &:hover {
+                transform: scale(1.1);
+                }
+            }            
+        }
+        }
+    }

@@ -10,7 +10,7 @@ type Props = {
 
 const PaginationButton = ({ action, className, onClick }: Props) => {
     const style = cn(
-        'size-[50px] flex justify-center items-center bg-button-secondary text-fg-on-color border border-bg-base cursor-pointer',
+        'size-[50px] flex justify-center items-center bg-button-secondary text-fg-on-color border border-bg-base cursor-pointer hover:bg-button-secondary-hover',
         className,
     );
 

@@ -10,7 +10,7 @@ const VolunteerSmall = ({ volunteer }: Props) => {
 
     return (
         <div className="block border-b border-solid border-base w-full py-m">
-            <h3 className="text-heading-sm uppercase pb-xs">{volunteer?.displayName || volunteer?.volunteerName}</h3>
+            <h3 className="heading-4 uppercase pb-xs">{volunteer?.displayName || volunteer?.volunteerName}</h3>
             {role && <span className="italic body-md">{role}</span>}
         </div>
     );

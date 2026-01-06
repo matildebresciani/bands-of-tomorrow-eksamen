@@ -25,7 +25,7 @@ const ConcertsList = ({ concerts, className }: Props) => {
     }, {});
 
     // Global tæller på tværs af grupper
-    const globalIndex = 0;
+    let globalIndex = 0;
 
     return (
         <div className={className}>
@@ -38,9 +38,10 @@ const ConcertsList = ({ concerts, className }: Props) => {
 
                     {/* Concert cards i højre kolonne som flex-column */}
                     <div className="col-span-12 md:col-start-5 md:col-span-8 flex flex-col">
-                        {concerts.map((concert, idx) => (
-                            <ConcertCard key={concert.id} concert={concert} index={idx} />
-                        ))}
+                        {concerts.map((concert) => {
+                            const idx = globalIndex++;
+                            return <ConcertCard key={concert.id} concert={concert} index={idx} />;
+                        })}
                     </div>
                 </div>
             ))}

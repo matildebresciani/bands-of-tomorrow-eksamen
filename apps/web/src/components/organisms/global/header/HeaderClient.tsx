@@ -115,18 +115,7 @@ export default function HeaderClient({ main, mobile, locale }: Props) {
                                 )}
                             </div>
 
-                            {/* Række 2 — Navigation */}
-                            <div className="flex w-full items-center justify-between">
-                                {/* Navigation – får lov at fylde pladsen, men centreres vertikalt */}
-                                <nav className="flex items-center">
-                                    {main && <MainNavigation data={main} locale={locale} />}
-                                </nav>
-
-                                {/* Search – alignes i midten og får stabil klik-flade */}
-                                <div className="flex items-center justify-center pl-s">
-                                    <SearchBar />
-                                </div>
-                            </div>
+                            {main && <MainNavigation data={main} locale={locale} />}
                         </div>
 
                         {/* MOBILE + TABLET LAYOUT */}

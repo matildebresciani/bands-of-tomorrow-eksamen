@@ -1,19 +1,51 @@
 'use client';
 
-import PaginationButton from '@/components/atoms/frontend/buttons/PaginationButton';
 import { ImageMedia } from '@/components/atoms/frontend/media/ImageMedia';
 import { cn } from '@/lib/utilities/ui';
 import type { Media } from '@/payload-types';
 import React, { useEffect, useState } from 'react';
-import LightboxDesktop from './components/LightboxDesktop';
-import LightboxMobile from './components/LightboxMobile';
+import GalleryLightbox from './components/GalleryLightbox';
 
 type Props = {
     images: Media[];
+    galleryTitle: string;
     className?: string;
 };
 
-export default function GalleryGrid({ images, className }: Props) {
+const GalleryImageTile = ({
+    image,
+    index,
+    onOpen,
+}: { image: Media; index: number; onOpen: (index: number) => void }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const aspectRatio = image.width && image.height ? `${image.width} / ${image.height}` : '4 / 5';
+
+    return (
+        <button
+            type="button"
+            className="mb-xs block break-inside-avoid cursor-zoom-in md:mb-s"
+            onClick={() => onOpen(index)}
+            aria-label={`Open image ${index + 1}`}
+        >
+            <span className="grid overflow-hidden border border-border-base" style={{ aspectRatio }}>
+                {!isLoaded && (
+                    <span className="col-start-1 row-start-1 animate-pulse bg-bg-subtle" aria-hidden="true" />
+                )}
+                <ImageMedia
+                    resource={image}
+                    imgClassName={cn(
+                        'col-start-1 row-start-1 h-full w-full object-cover transition duration-500 ease-out hover:scale-105',
+                        isLoaded ? 'opacity-100' : 'opacity-0',
+                    )}
+                    onLoad={() => setIsLoaded(true)}
+                    size="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                />
+            </span>
+        </button>
+    );
+};
+
+export default function GalleryGrid({ images, galleryTitle, className }: Props) {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     useEffect(() => {
@@ -37,60 +69,38 @@ export default function GalleryGrid({ images, className }: Props) {
         return () => window.removeEventListener('keydown', onKeyDown);
     }, [activeIndex, images.length]);
 
+    useEffect(() => {
+        if (activeIndex === null) return;
+
+        const { body } = document;
+        const previousOverflow = body.style.overflow;
+        body.style.overflow = 'hidden';
+
+        return () => {
+            body.style.overflow = previousOverflow;
+        };
+    }, [activeIndex]);
+
     if (!images || images.length === 0) return null;
-
-    const goNext = () => {
-        setActiveIndex((prev) => (prev !== null ? (prev + 1) % images.length : prev));
-    };
-
-    const goPrev = () => {
-        setActiveIndex((prev) => (prev !== null ? (prev - 1 + images.length) % images.length : prev));
-    };
 
     return (
         <>
             {/* GRID */}
             <div className={cn('columns-2 md:columns-3 gap-xs md:gap-s', className)}>
                 {images.map((image, index) => (
-                    <button
-                        key={image.id}
-                        type="button"
-                        className="mb-xs md:mb-s break-inside-avoid cursor-zoom-in  overflow-hidden"
-                        onClick={() => setActiveIndex(index)}
-                    >
-                        <ImageMedia
-                            resource={image}
-                            imgClassName="w-full h-auto transition-transform duration-500 ease-out hover:scale-120"
-                            size="100vw, (min-width: 769px) 50vw, (min-width: 1281px) 33vw"
-                        />
-                    </button>
+                    <GalleryImageTile key={image.id} image={image} index={index} onOpen={setActiveIndex} />
                 ))}
             </div>
 
             {/* LIGHTBOX */}
             {activeIndex !== null && (
-                <>
-                    {/* MOBILE */}
-                    <div className="md:hidden">
-                        <LightboxMobile
-                            images={images}
-                            activeIndex={activeIndex}
-                            setActiveIndex={setActiveIndex}
-                            onClose={() => setActiveIndex(null)}
-                        />
-                    </div>
-
-                    {/* DESKTOP */}
-                    <div className="hidden md:block">
-                        <LightboxDesktop
-                            images={images}
-                            activeIndex={activeIndex}
-                            onClose={() => setActiveIndex(null)}
-                            onNext={goNext}
-                            onPrev={goPrev}
-                        />
-                    </div>
-                </>
+                <GalleryLightbox
+                    images={images}
+                    galleryTitle={galleryTitle}
+                    activeIndex={activeIndex}
+                    setActiveIndex={setActiveIndex}
+                    onClose={() => setActiveIndex(null)}
+                />
             )}
         </>
     );

@@ -23,6 +23,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         fallbackAlt,
         fill,
         imgClassName,
+        onLoad,
         priority,
         resource,
         size: sizeFromProps,
@@ -68,6 +69,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
             quality={100}
             loading={loading}
             fetchPriority={loading !== 'lazy' ? 'high' : undefined} // <-- Tilføjer fetchpriority high, hvis loading ikke er lazy
+            onLoad={() => onLoad?.()}
             sizes={sizes}
             src={src}
             width={!fill ? width : undefined}

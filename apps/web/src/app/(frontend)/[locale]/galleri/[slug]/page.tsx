@@ -55,7 +55,7 @@ export default async function Page({ params }: Props) {
                         </div>
                     </div>
 
-                    <GalleryGrid images={images} className="col-span-12" />
+                    <GalleryGrid images={images} galleryTitle={gallery.title} className="col-span-12" />
                 </div>
             </BaseBlock>
         </article>

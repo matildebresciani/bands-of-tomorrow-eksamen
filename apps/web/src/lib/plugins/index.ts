@@ -1,5 +1,4 @@
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
-import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types';
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
@@ -22,10 +21,6 @@ const generateURL: GenerateURL<Article | Page> = ({ doc, locale }) => {
 };
 
 export const plugins: Plugin[] = [
-    nestedDocsPlugin({
-        collections: ['article-categories'],
-        generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
-    }),
     seoPlugin({
         generateTitle,
         generateURL,

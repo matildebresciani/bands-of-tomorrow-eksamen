@@ -72,7 +72,6 @@ export interface Config {
     articles: Article;
     concerts: Concert;
     galleries: Gallery1;
-    'article-categories': ArticleCategory;
     genres: Genre;
     volunteers: Volunteer;
     media: Media;
@@ -89,9 +88,6 @@ export interface Config {
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {
-    'article-categories': {
-      viewArticlesInCategory: 'articles';
-    };
     genres: {
       viewArticlesInGenre: 'articles';
     };
@@ -101,7 +97,6 @@ export interface Config {
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     concerts: ConcertsSelect<false> | ConcertsSelect<true>;
     galleries: GalleriesSelect<false> | GalleriesSelect<true>;
-    'article-categories': ArticleCategoriesSelect<false> | ArticleCategoriesSelect<true>;
     genres: GenresSelect<false> | GenresSelect<true>;
     volunteers: VolunteersSelect<false> | VolunteersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -261,7 +256,6 @@ export interface Article {
   reviewType?: ('concert' | 'album') | null;
   genres?: (string | Genre)[] | null;
   artistName?: string | null;
-  categories?: (string | ArticleCategory)[] | null;
   relatedArticles?: (string | Article)[] | null;
   layout?: (Paragraph | ArticleAuthor | RelatedArticles | Playlist | Quote | ArticleHero | Gallery | Form)[] | null;
   meta?: {
@@ -301,54 +295,6 @@ export interface Genre {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "article-categories".
- */
-export interface ArticleCategory {
-  id: string;
-  /**
-   * This is the name of the page, it will only be used in the admin panel. And is not localized.
-   */
-  name: string;
-  /**
-   * This title will be used in references and will set the slug.
-   */
-  title: string;
-  viewArticlesInCategory?: {
-    docs?: (string | Article)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  layout?: Paragraph[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishStatus: 'draft' | 'pendingApproval' | 'public';
-  slug?: string | null;
-  slugLock?: boolean | null;
-  contentMeta?: {
-    featuredImage?: (string | null) | Media;
-    excerpt?: string | null;
-  };
-  parent?: (string | null) | ArticleCategory;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | ArticleCategory;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Paragraph".
  */
 export interface Paragraph {
@@ -370,6 +316,32 @@ export interface Paragraph {
   id?: string | null;
   blockName?: string | null;
   blockType: 'paragraph';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArticleAuthor".
+ */
+export interface ArticleAuthor {
+  author?: (string | null) | Volunteer;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'article-author';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteers".
+ */
+export interface Volunteer {
+  id: string;
+  volunteerName: string;
+  displayName?: string | null;
+  roleGroup: 'core' | 'regular';
+  volunteerRole: 'writer' | 'photographer' | 'social' | 'design' | 'other';
+  customRole?: string | null;
+  email?: string | null;
+  profilePicture?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -462,32 +434,6 @@ export interface Media {
       filename?: string | null;
     };
   };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArticleAuthor".
- */
-export interface ArticleAuthor {
-  author?: (string | null) | Volunteer;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'article-author';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "volunteers".
- */
-export interface Volunteer {
-  id: string;
-  volunteerName: string;
-  displayName?: string | null;
-  roleGroup: 'core' | 'regular';
-  volunteerRole: 'writer' | 'photographer' | 'social' | 'design' | 'other';
-  customRole?: string | null;
-  email?: string | null;
-  profilePicture?: (string | null) | Media;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -709,10 +655,6 @@ export interface TextImage {
           value: string | Article;
         } | null)
       | ({
-          relationTo: 'article-categories';
-          value: string | ArticleCategory;
-        } | null)
-      | ({
           relationTo: 'galleries';
           value: string | Gallery1;
         } | null);
@@ -780,10 +722,6 @@ export interface ArticleSlider {
       | ({
           relationTo: 'articles';
           value: string | Article;
-        } | null)
-      | ({
-          relationTo: 'article-categories';
-          value: string | ArticleCategory;
         } | null)
       | ({
           relationTo: 'galleries';
@@ -947,10 +885,6 @@ export interface FeaturedConcerts {
           value: string | Article;
         } | null)
       | ({
-          relationTo: 'article-categories';
-          value: string | ArticleCategory;
-        } | null)
-      | ({
           relationTo: 'galleries';
           value: string | Gallery1;
         } | null);
@@ -991,10 +925,6 @@ export interface VolunteersTeam {
       | ({
           relationTo: 'articles';
           value: string | Article;
-        } | null)
-      | ({
-          relationTo: 'article-categories';
-          value: string | ArticleCategory;
         } | null)
       | ({
           relationTo: 'galleries';
@@ -1119,10 +1049,6 @@ export interface Navigation {
                 value: string | Article;
               } | null)
             | ({
-                relationTo: 'article-categories';
-                value: string | ArticleCategory;
-              } | null)
-            | ({
                 relationTo: 'galleries';
                 value: string | Gallery1;
               } | null);
@@ -1143,10 +1069,6 @@ export interface Navigation {
                   | ({
                       relationTo: 'articles';
                       value: string | Article;
-                    } | null)
-                  | ({
-                      relationTo: 'article-categories';
-                      value: string | ArticleCategory;
                     } | null)
                   | ({
                       relationTo: 'galleries';
@@ -1197,6 +1119,7 @@ export interface Redirect {
 export interface User {
   id: string;
   name?: string | null;
+  userRole?: ('admin' | 'editor') | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1250,10 +1173,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'galleries';
         value: string | Gallery1;
-      } | null)
-    | ({
-        relationTo: 'article-categories';
-        value: string | ArticleCategory;
       } | null)
     | ({
         relationTo: 'genres';
@@ -1627,7 +1546,6 @@ export interface ArticlesSelect<T extends boolean = true> {
   reviewType?: T;
   genres?: T;
   artistName?: T;
-  categories?: T;
   relatedArticles?: T;
   layout?:
     | T
@@ -1780,48 +1698,6 @@ export interface GalleriesSelect<T extends boolean = true> {
     | {
         featuredImage?: T;
         excerpt?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "article-categories_select".
- */
-export interface ArticleCategoriesSelect<T extends boolean = true> {
-  name?: T;
-  title?: T;
-  viewArticlesInCategory?: T;
-  layout?:
-    | T
-    | {
-        paragraph?: T | ParagraphSelect<T>;
-      };
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  publishStatus?: T;
-  slug?: T;
-  slugLock?: T;
-  contentMeta?:
-    | T
-    | {
-        featuredImage?: T;
-        excerpt?: T;
-      };
-  parent?: T;
-  breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -2075,6 +1951,7 @@ export interface RedirectsSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  userRole?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -2255,10 +2132,6 @@ export interface Option {
       | ({
           relationTo: 'articles';
           value: string | Article;
-        } | null)
-      | ({
-          relationTo: 'article-categories';
-          value: string | ArticleCategory;
         } | null)
       | ({
           relationTo: 'galleries';

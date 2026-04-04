@@ -1,7 +1,9 @@
+import { adminOnlyCollectionAccess } from '@/access/presets';
 import type { CollectionConfig } from 'payload';
 
 export const ApiKeys: CollectionConfig = {
     slug: 'apiKeys',
+    access: adminOnlyCollectionAccess,
     labels: {
         singular: 'API Key',
         plural: 'API Keys',

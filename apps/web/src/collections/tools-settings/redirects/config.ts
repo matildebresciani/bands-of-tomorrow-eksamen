@@ -1,7 +1,9 @@
+import { adminOnlyCollectionAccess } from '@/access/presets';
 import type { CollectionConfig } from 'payload';
 
 export const Redirects: CollectionConfig = {
     slug: 'redirects',
+    access: adminOnlyCollectionAccess,
     labels: {
         singular: 'Redirect',
         plural: 'Redirects',

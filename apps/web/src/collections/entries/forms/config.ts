@@ -1,7 +1,9 @@
+import { adminOrPublishedCollectionAccess } from '@/access/presets';
 import { createCollection } from '@/lib/collection-templates/collection';
 import { payloadPublishStatus, payloadPublishedAt } from '@/lib/field-templates/publish-state';
 
 export const Forms = createCollection('dynamic-forms', {
+    access: adminOrPublishedCollectionAccess,
     admin: {
         group: 'Entries',
         useAsTitle: 'title',

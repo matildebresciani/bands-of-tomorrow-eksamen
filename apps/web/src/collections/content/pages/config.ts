@@ -1,3 +1,4 @@
+import { adminOrPublishedCollectionAccess } from '@/access/presets';
 import { ArticleSlider } from '@/components/organisms/blocks/article-slider/config';
 import { Divider } from '@/components/organisms/blocks/divider/config';
 import { FAQ } from '@/components/organisms/blocks/faq/config';
@@ -52,6 +53,7 @@ export const Pages = createRoutedCollection('pages', {
         title: true,
         slug: true,
     },
+    access: adminOrPublishedCollectionAccess,
     admin: {
         defaultColumns: ['name', 'title', 'slug', 'updatedAt', 'publishStatus'],
         group: 'Content',

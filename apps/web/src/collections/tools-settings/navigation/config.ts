@@ -1,16 +1,14 @@
 import { payloadLink } from '@/lib/field-templates/links';
 import type { CollectionConfig } from 'payload';
+import { adminOnlyCollectionAccess } from '../../../access/presets';
 import { anyone } from '../../../access/anyone';
-import { authenticated } from '../../../access/authenticated';
 import { revalidateNavigation } from './hooks/revalidate-navigation';
 
 export const Navigation: CollectionConfig<'navigation'> = {
     slug: 'navigation',
     access: {
-        create: authenticated,
-        delete: authenticated,
+        ...adminOnlyCollectionAccess,
         read: anyone,
-        update: authenticated,
     },
     admin: {
         useAsTitle: 'title',

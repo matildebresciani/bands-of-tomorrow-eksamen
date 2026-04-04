@@ -6,6 +6,7 @@ import type { CollectionConfig } from 'payload';
 export const Genres: CollectionConfig = {
     slug: 'genres',
     access: {
+        admin: authenticated,
         create: authenticated,
         delete: authenticated,
         read: anyone,

@@ -15,6 +15,7 @@ import { Articles } from './collections/content/articles/config';
 import { Concerts } from './collections/content/concerts/config';
 import { Galleries } from './collections/content/galleries/config';
 import { Pages } from './collections/content/pages/config';
+import { SavedLayoutsCollection } from './collections/content/saved-layouts/config';
 import { Faqs } from './collections/entries/faqs/config';
 import { Forms } from './collections/entries/forms/config';
 import { Quotes } from './collections/entries/quotes/config';
@@ -73,6 +74,7 @@ export default buildConfig({
         Articles,
         Concerts,
         Galleries,
+        SavedLayoutsCollection,
         Genres,
         Volunteers,
         Media,

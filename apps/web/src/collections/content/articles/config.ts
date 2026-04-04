@@ -1,23 +1,14 @@
-import { ArticleAuthor } from '@/components/organisms/blocks/article-author/config';
-import { ArticleHero } from '@/components/organisms/blocks/article-hero/config';
-import { Form } from '@/components/organisms/blocks/form/config';
-import { Gallery } from '@/components/organisms/blocks/gallery/config';
-import { Paragraph } from '@/components/organisms/blocks/paragraph/config';
-import { Playlist } from '@/components/organisms/blocks/playlist-block/config';
-import { Quote } from '@/components/organisms/blocks/quote/config';
-import { RelatedArticles } from '@/components/organisms/blocks/related-articles/config';
 import { createDraftOnlyEditorUpdateAccess } from '@/access/draftOnlyEditorUpdate';
 import { createRoutedCollection } from '@/lib/collection-templates/routed-collection';
+import { articleLayoutBlocks } from '@/lib/content/layout-blocks';
 import { payloadLivePreview } from '@/lib/field-templates/live-preview';
 import { payloadSEO } from '@/lib/field-templates/seo';
-import type { Block, CollectionConfig } from 'payload';
-import { authenticatedAndAdmin } from '../../../access/authenticatedAndAdmin';
+import type { CollectionConfig } from 'payload';
 import { authenticated } from '../../../access/authenticated';
+import { authenticatedAndAdmin } from '../../../access/authenticatedAndAdmin';
 import { authenticatedOrPublished } from '../../../access/authenticatedOrPublished';
 import { generatePreviewPath } from '../../../lib/utilities/generate-preview-path';
 import { enforceArticleWorkflow } from './hooks/enforce-article-workflow';
-
-const blocks: Block[] = [Paragraph, ArticleAuthor, RelatedArticles, Playlist, Quote, ArticleHero, Gallery, Form];
 
 export const Articles: CollectionConfig = createRoutedCollection('articles', {
     access: {
@@ -130,7 +121,7 @@ export const Articles: CollectionConfig = createRoutedCollection('articles', {
                             name: 'layout',
                             type: 'blocks',
                             localized: true,
-                            blocks,
+                            blocks: articleLayoutBlocks,
                             admin: {
                                 initCollapsed: false,
                             },

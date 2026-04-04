@@ -17,6 +17,7 @@ const Logo = ({ variant = 'icon', className }: Props) => {
             height={variant === 'full' ? 242 : 61}
             className={cn(className)}
             priority
+            unoptimized // avoid automatic optimization to preserve SVG quality
         />
     );
 };

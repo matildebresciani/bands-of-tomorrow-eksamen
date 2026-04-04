@@ -1,4 +1,3 @@
-import { payloadHeading } from '@/lib/field-templates/headings';
 import type { Block } from 'payload';
 
 export const RelatedArticles: Block = {

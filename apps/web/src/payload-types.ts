@@ -72,6 +72,7 @@ export interface Config {
     articles: Article;
     concerts: Concert;
     galleries: Gallery1;
+    'saved-layouts': SavedLayout;
     genres: Genre;
     volunteers: Volunteer;
     media: Media;
@@ -97,6 +98,7 @@ export interface Config {
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     concerts: ConcertsSelect<false> | ConcertsSelect<true>;
     galleries: GalleriesSelect<false> | GalleriesSelect<true>;
+    'saved-layouts': SavedLayoutsSelect1<false> | SavedLayoutsSelect1<true>;
     genres: GenresSelect<false> | GenresSelect<true>;
     volunteers: VolunteersSelect<false> | VolunteersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -203,6 +205,7 @@ export interface Page {
         | VolunteersTeam
         | TextCard
         | GallerySlider
+        | SavedLayouts
       )[]
     | null;
   meta?: {
@@ -257,7 +260,9 @@ export interface Article {
   genres?: (string | Genre)[] | null;
   artistName?: string | null;
   relatedArticles?: (string | Article)[] | null;
-  layout?: (Paragraph | ArticleAuthor | RelatedArticles | Playlist | Quote | ArticleHero | Gallery | Form)[] | null;
+  layout?:
+    | (Paragraph | ArticleAuthor | RelatedArticles | Playlist | Quote | ArticleHero | Gallery | Form | SavedLayouts)[]
+    | null;
   meta?: {
     title?: string | null;
     /**
@@ -612,6 +617,53 @@ export interface DynamicForm {
   emailSubject?: string | null;
   publishedAt?: string | null;
   publishStatus: 'draft' | 'pendingApproval' | 'public';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SavedLayouts".
+ */
+export interface SavedLayouts {
+  savedLayout: string | SavedLayout;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'saved-layouts';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "saved-layouts".
+ */
+export interface SavedLayout {
+  id: string;
+  title: string;
+  layout?:
+    | (
+        | Hero
+        | Paragraph
+        | TextImage
+        | ArticleSlider
+        | RecentArticles
+        | Divider
+        | FeaturedArticle
+        | VolunteerRoles
+        | Form
+        | QuoteSlider
+        | HeadingBlock
+        | FAQ
+        | FeaturedConcerts
+        | MainTeam
+        | VolunteersTeam
+        | TextCard
+        | GallerySlider
+        | ArticleAuthor
+        | RelatedArticles
+        | Playlist
+        | Quote
+        | ArticleHero
+        | Gallery
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1175,6 +1227,10 @@ export interface PayloadLockedDocument {
         value: string | Gallery1;
       } | null)
     | ({
+        relationTo: 'saved-layouts';
+        value: string | SavedLayout;
+      } | null)
+    | ({
         relationTo: 'genres';
         value: string | Genre;
       } | null)
@@ -1297,6 +1353,7 @@ export interface PagesSelect<T extends boolean = true> {
         'volunteers-team'?: T | VolunteersTeamSelect<T>;
         'text-card'?: T | TextCardSelect<T>;
         'gallery-slider'?: T | GallerySliderSelect<T>;
+        'saved-layouts'?: T | SavedLayoutsSelect<T>;
       };
   meta?:
     | T
@@ -1537,6 +1594,15 @@ export interface GallerySliderSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SavedLayouts_select".
+ */
+export interface SavedLayoutsSelect<T extends boolean = true> {
+  savedLayout?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "articles_select".
  */
 export interface ArticlesSelect<T extends boolean = true> {
@@ -1558,6 +1624,7 @@ export interface ArticlesSelect<T extends boolean = true> {
         'article-hero'?: T | ArticleHeroSelect<T>;
         gallery?: T | GallerySelect<T>;
         form?: T | FormSelect<T>;
+        'saved-layouts'?: T | SavedLayoutsSelect<T>;
       };
   meta?:
     | T
@@ -1702,6 +1769,42 @@ export interface GalleriesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "saved-layouts_select".
+ */
+export interface SavedLayoutsSelect1<T extends boolean = true> {
+  title?: T;
+  layout?:
+    | T
+    | {
+        hero?: T | HeroSelect<T>;
+        paragraph?: T | ParagraphSelect<T>;
+        'text-image'?: T | TextImageSelect<T>;
+        'article-slider'?: T | ArticleSliderSelect<T>;
+        'recent-articles'?: T | RecentArticlesSelect<T>;
+        divider?: T | DividerSelect<T>;
+        'featured-article'?: T | FeaturedArticleSelect<T>;
+        'volunteer-roles'?: T | VolunteerRolesSelect<T>;
+        form?: T | FormSelect<T>;
+        'quote-slider'?: T | QuoteSliderSelect<T>;
+        'heading-block'?: T | HeadingBlockSelect<T>;
+        faq?: T | FAQSelect<T>;
+        'featured-concerts'?: T | FeaturedConcertsSelect<T>;
+        'main-team'?: T | MainTeamSelect<T>;
+        'volunteers-team'?: T | VolunteersTeamSelect<T>;
+        'text-card'?: T | TextCardSelect<T>;
+        'gallery-slider'?: T | GallerySliderSelect<T>;
+        'article-author'?: T | ArticleAuthorSelect<T>;
+        'related-articles'?: T | RelatedArticlesSelect<T>;
+        playlist?: T | PlaylistSelect<T>;
+        quote?: T | QuoteSelect<T>;
+        'article-hero'?: T | ArticleHeroSelect<T>;
+        gallery?: T | GallerySelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

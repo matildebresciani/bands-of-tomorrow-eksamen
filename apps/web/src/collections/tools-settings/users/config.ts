@@ -1,15 +1,9 @@
+import { adminManagedCollectionAccess } from '@/access/presets';
 import type { CollectionConfig } from 'payload';
-import { authenticated } from '../../../access/authenticated';
 
 export const Users: CollectionConfig = {
     slug: 'users',
-    access: {
-        admin: authenticated,
-        create: authenticated,
-        delete: authenticated,
-        read: authenticated,
-        update: authenticated,
-    },
+    access: adminManagedCollectionAccess,
     admin: {
         defaultColumns: ['name', 'email'],
         useAsTitle: 'name',
@@ -20,6 +14,22 @@ export const Users: CollectionConfig = {
         {
             name: 'name',
             type: 'text',
+        },
+        {
+            type: 'select',
+            name: 'userRole',
+            label: 'User Role',
+            defaultValue: 'admin',
+            options: [
+                {
+                    label: 'Admin',
+                    value: 'admin',
+                },
+                {
+                    label: 'Editor',
+                    value: 'editor',
+                },
+            ],
         },
     ],
     timestamps: true,

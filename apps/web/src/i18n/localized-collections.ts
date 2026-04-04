@@ -1,10 +1,6 @@
 import type { CollectionSlug } from 'payload';
 
 export const localizedCollections = {
-    'article-categories': {
-        en: 'articles',
-        da: 'artikler',
-    },
     articles: {
         en: 'article',
         da: 'artikel',
@@ -39,7 +35,6 @@ export const nonDefaultLocales = locales.filter((locale) => locale !== defaultLo
 export const routedCollections = [
     'pages',
     'articles',
-    'article-categories',
     'galleries',
 ] as const satisfies readonly CollectionSlug[];
 /**

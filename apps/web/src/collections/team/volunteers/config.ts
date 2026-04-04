@@ -1,4 +1,5 @@
 import { anyone } from '@/access/anyone';
+import { adminOnlyCollectionAccess } from '@/access/presets';
 import { createCollection } from '@/lib/collection-templates/collection';
 
 export const Volunteers = createCollection('volunteers', {
@@ -7,6 +8,7 @@ export const Volunteers = createCollection('volunteers', {
         group: 'Team',
     },
     access: {
+        ...adminOnlyCollectionAccess,
         read: anyone,
     },
     fields: [

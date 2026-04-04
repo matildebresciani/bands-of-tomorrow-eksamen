@@ -5,6 +5,7 @@ import {
     defaultLocale,
     isLocale,
     isLocalizableCollection,
+    isRoutedCollection,
     localizedCollections,
     localizedPaths,
 } from '@/i18n/localized-collections';
@@ -51,7 +52,9 @@ export const formatLink = (
 
     const slug = link.relation.value.slug;
     const slugPath = slug === '/' ? '' : (`/${slug}` as const);
-    const collectionPath = localizeCollection(link.relation.relationTo, validatedLocale);
+    const collectionPath = isRoutedCollection(link.relation.relationTo)
+        ? localizeCollection(link.relation.relationTo, validatedLocale)
+        : ('' as const);
 
     return `${localePath}${collectionPath}${slugPath}` as const;
 };

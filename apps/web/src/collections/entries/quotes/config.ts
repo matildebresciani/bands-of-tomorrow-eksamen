@@ -1,4 +1,5 @@
 import { anyone } from '@/access/anyone';
+import { adminOnlyCollectionAccess } from '@/access/presets';
 import { createCollection } from '@/lib/collection-templates/collection';
 
 export const Quotes = createCollection('quotes', {
@@ -8,6 +9,7 @@ export const Quotes = createCollection('quotes', {
         defaultColumns: ['quote', 'author'],
     },
     access: {
+        ...adminOnlyCollectionAccess,
         read: anyone,
     },
     fields: [

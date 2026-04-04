@@ -6,27 +6,30 @@ import { Paragraph } from '@/components/organisms/blocks/paragraph/config';
 import { Playlist } from '@/components/organisms/blocks/playlist-block/config';
 import { Quote } from '@/components/organisms/blocks/quote/config';
 import { RelatedArticles } from '@/components/organisms/blocks/related-articles/config';
+import { createDraftOnlyEditorUpdateAccess } from '@/access/draftOnlyEditorUpdate';
 import { createRoutedCollection } from '@/lib/collection-templates/routed-collection';
 import { payloadLivePreview } from '@/lib/field-templates/live-preview';
 import { payloadSEO } from '@/lib/field-templates/seo';
 import type { Block, CollectionConfig } from 'payload';
+import { authenticatedAndAdmin } from '../../../access/authenticatedAndAdmin';
 import { authenticated } from '../../../access/authenticated';
 import { authenticatedOrPublished } from '../../../access/authenticatedOrPublished';
 import { generatePreviewPath } from '../../../lib/utilities/generate-preview-path';
+import { enforceArticleWorkflow } from './hooks/enforce-article-workflow';
 
 const blocks: Block[] = [Paragraph, ArticleAuthor, RelatedArticles, Playlist, Quote, ArticleHero, Gallery, Form];
 
 export const Articles: CollectionConfig = createRoutedCollection('articles', {
     access: {
+        admin: authenticated,
         create: authenticated,
-        delete: authenticated,
+        delete: authenticatedAndAdmin,
         read: authenticatedOrPublished,
-        update: authenticated,
+        update: createDraftOnlyEditorUpdateAccess('articles'),
     },
     defaultPopulate: {
         title: true,
         slug: true,
-        categories: true,
         articleType: true,
     },
     admin: {
@@ -97,18 +100,6 @@ export const Articles: CollectionConfig = createRoutedCollection('articles', {
                             name: 'artistName',
                             label: 'Artist Navn',
                         },
-                        // --- CATEGORIES ---
-                        // Usikkert på om vi skal bruge denne endnu, og til hvad
-                        {
-                            name: 'categories',
-                            label: 'Kategorier',
-                            type: 'relationship',
-                            relationTo: 'article-categories',
-                            hasMany: true,
-                            admin: {
-                                position: 'sidebar',
-                            },
-                        },
                     ],
                 },
                 {
@@ -167,4 +158,7 @@ export const Articles: CollectionConfig = createRoutedCollection('articles', {
             ],
         },
     ],
+    hooks: {
+        beforeChange: [enforceArticleWorkflow],
+    },
 });

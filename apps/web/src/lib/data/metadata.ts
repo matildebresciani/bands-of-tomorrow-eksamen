@@ -2,11 +2,9 @@ import {
     type Locale,
     type RoutedCollectionSlug,
     defaultLocale,
-    paginationTranslations,
 } from '@/i18n/localized-collections';
 import type { Metadata } from 'next';
 import { initPayload } from '../config';
-import { pageNumberSchema } from '../schemas/pages';
 import { trimTrailingSlash } from '../utilities/composables';
 import { formatLinkByCollection } from '../utilities/format-link';
 import { getServerSideURL } from '../utilities/get-url';
@@ -94,77 +92,6 @@ export const generateEntryMetadata = async (slug: string, collection: Collection
     if (entry.slug) {
         meta.alternates = {
             canonical: formatLinkByCollection(entry.slug, collection, locale),
-        };
-    }
-
-    return meta;
-};
-
-type ArchiveMetadataProps = {
-    slug: string;
-    collection: 'article-categories';
-    locale: Locale;
-    pageNumber: string | number | undefined;
-};
-export const generateArchiveMetadata = async (props: ArchiveMetadataProps) => {
-    const { slug, collection, locale, pageNumber } = props;
-
-    const meta: Metadata = {};
-
-    const [entry, options] = await Promise.all([
-        getCachedEntryBySlug({
-            collection,
-            slug,
-            locale,
-        }),
-        getCachedOptions(locale),
-    ]);
-
-    if (!entry) return meta;
-
-    const pageNumberValidation = pageNumberSchema.safeParse(pageNumber);
-    const validatedPageNumber = pageNumberValidation.data;
-
-    const titlePrefix = options.meta?.metaTitlePrefix ?? '';
-    const titleSuffix = options.meta?.metaTitleSuffix ?? '';
-    const pageTitle = entry.meta?.title?.length ? entry.meta.title : entry.title;
-    const pageTitleNumber =
-        pageNumberValidation.success && validatedPageNumber && validatedPageNumber > 1
-            ? ` - ${paginationTranslations.page[locale]} ${validatedPageNumber}`
-            : '';
-
-    meta.title = `${titlePrefix}${pageTitle}${titleSuffix}${pageTitleNumber}`;
-    if (entry.meta?.description) meta.description = entry.meta.description;
-
-    if (entry.meta?.image) {
-        const imageSlug = await getImageSlugFromMedia(entry.meta.image, locale);
-        if (imageSlug) {
-            // TODO: Vil det her virke hvis vi sætter en URL fra APIen?
-            const imagePath = imageSlug.startsWith('/')
-                ? `${trimTrailingSlash(getServerSideURL())}${imageSlug}`
-                : imageSlug;
-
-            meta.openGraph = {
-                images: [
-                    {
-                        url: imagePath,
-                    },
-                ],
-            };
-        }
-    }
-
-    if (entry.slug) {
-        let canonicalUrl = formatLinkByCollection(entry.slug, collection, locale);
-
-        if (pageNumber) {
-            if (pageNumberValidation.success && validatedPageNumber && validatedPageNumber > 1) {
-                canonicalUrl = `${canonicalUrl}/${paginationTranslations.page[locale]}/${validatedPageNumber}`;
-            }
-        }
-
-        meta.alternates = {
-            canonical: canonicalUrl,
         };
     }
 

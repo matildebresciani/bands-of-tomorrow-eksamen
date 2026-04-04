@@ -16,6 +16,7 @@ export const Media: CollectionConfig = {
         group: 'Assets',
     },
     access: {
+        admin: authenticated,
         create: authenticated,
         delete: authenticated,
         read: anyone,

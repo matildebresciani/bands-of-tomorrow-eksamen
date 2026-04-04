@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { adminOnlyCollectionAccess } from '@/access/presets';
 import type { CollectionConfig } from 'payload';
 
 import { anyone } from '../../../access/anyone';
@@ -14,10 +15,8 @@ export const Icons: CollectionConfig = {
         group: 'Assets',
     },
     access: {
-        create: authenticated,
-        delete: authenticated,
+        ...adminOnlyCollectionAccess,
         read: anyone,
-        update: authenticated,
     },
     fields: [
         {

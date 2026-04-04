@@ -1,6 +1,6 @@
 import { createNavigation } from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
-import { defaultLocale, locales, localizedCollections, paginationTranslations } from './localized-collections';
+import { defaultLocale, locales, localizedCollections, localizedPaths, paginationTranslations } from './localized-collections';
 
 export const routing = defineRouting({
     // A list of all locales that are supported
@@ -18,20 +18,12 @@ export const routing = defineRouting({
     pathnames: {
         '/': '/',
         '/articles': {
-            en: `/${localizedCollections['article-categories'].en}/`,
-            da: `/${localizedCollections['article-categories'].da}/`,
+            en: `/${localizedPaths.articles.en}/`,
+            da: `/${localizedPaths.articles.da}/`,
         },
         '/articles/page/[pageNumber]': {
-            en: `/${localizedCollections['article-categories'].en}/${paginationTranslations.page.en}/[pageNumber]`,
-            da: `/${localizedCollections['article-categories'].da}/${paginationTranslations.page.da}/[pageNumber]`,
-        },
-        '/articles/[slug]': {
-            en: `/${localizedCollections['article-categories'].en}/[slug]`,
-            da: `/${localizedCollections['article-categories'].da}/[slug]`,
-        },
-        '/articles/[slug]/page/[pageNumber]': {
-            en: `/${localizedCollections['article-categories'].en}/[slug]/${paginationTranslations.page.en}/[pageNumber]`,
-            da: `/${localizedCollections['article-categories'].da}/[slug]/${paginationTranslations.page.da}/[pageNumber]`,
+            en: `/${localizedPaths.articles.en}/${paginationTranslations.page.en}/[pageNumber]`,
+            da: `/${localizedPaths.articles.da}/${paginationTranslations.page.da}/[pageNumber]`,
         },
         '/article/[slug]': {
             en: `/${localizedCollections.articles.en}/[slug]`,

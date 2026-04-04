@@ -10,7 +10,6 @@ import { type PayloadRequest, buildConfig } from 'payload';
 import sharp from 'sharp'; // sharp-import
 import { Icons } from './collections/assets/icons/config';
 import { Media } from './collections/assets/media/config';
-import { ArticleCategories } from './collections/categories/article-categories/config';
 import { Genres } from './collections/categories/article-genres/config';
 import { Articles } from './collections/content/articles/config';
 import { Concerts } from './collections/content/concerts/config';
@@ -74,7 +73,6 @@ export default buildConfig({
         Articles,
         Concerts,
         Galleries,
-        ArticleCategories,
         Genres,
         Volunteers,
         Media,

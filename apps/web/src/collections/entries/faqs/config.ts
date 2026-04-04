@@ -1,16 +1,10 @@
-import { authenticated } from '@/access/authenticated';
-import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
+import { adminOrPublishedCollectionAccess } from '@/access/presets';
 import { payloadPublishStatus, payloadPublishedAt } from '@/lib/field-templates/publish-state';
 import type { CollectionConfig } from 'payload';
 
 export const Faqs: CollectionConfig = {
     slug: 'faqs',
-    access: {
-        create: authenticated,
-        delete: authenticated,
-        read: authenticatedOrPublished,
-        update: authenticated,
-    },
+    access: adminOrPublishedCollectionAccess,
     labels: {
         singular: 'FAQ',
         plural: 'FAQs',

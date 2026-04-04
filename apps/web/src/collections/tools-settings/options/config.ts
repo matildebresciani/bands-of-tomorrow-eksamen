@@ -1,5 +1,5 @@
 import { anyone } from '@/access/anyone';
-import { authenticated } from '@/access/authenticated';
+import { adminOnlyGlobalAccess } from '@/access/presets';
 import { payloadConditionalLink, payloadLink, payloadLinkInner } from '@/lib/field-templates/links';
 import { payloadTranslationField } from '@/lib/field-templates/translation';
 import type { GlobalConfig } from 'payload';
@@ -13,7 +13,7 @@ export const Options: GlobalConfig = {
     },
     access: {
         read: anyone,
-        update: authenticated,
+        update: adminOnlyGlobalAccess.update,
     },
     fields: [
         {
